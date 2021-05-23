@@ -1,0 +1,5 @@
+D:\BugTracker\BugTracker\BugTrackerDB\bin\Debug\BugTrackerDB.dacpac
+D:\BugTracker\BugTracker\BugTrackerDB\bin\Debug\BugTrackerDB.dll
+D:\BugTracker\BugTracker\BugTrackerDB\bin\Debug\BugTrackerDB.pdb
+D:\BugTracker\BugTracker\BugTrackerDB\obj\Debug\BugTrackerDB.dll
+D:\BugTracker\BugTracker\BugTrackerDB\obj\Debug\BugTrackerDB.pdb
