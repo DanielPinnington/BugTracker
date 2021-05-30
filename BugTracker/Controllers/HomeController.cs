@@ -12,7 +12,11 @@ using System.Configuration;
 using DataLibrary.DataAccess;
 using System.Data.SqlClient;
 using Google.Apis.Admin.Directory.directory_v1.Data;
-using BugTracker.Models;
+using Microsoft.SqlServer;
+using DataLibrary.Models;
+using EmployeeModel = BugTracker.Models.EmployeeModel;
+using System.Diagnostics;
+
 namespace BugTracker.Controllers
 {
     public class HomeController : Controller
@@ -65,13 +69,19 @@ namespace BugTracker.Controllers
             return View();
         }
 
-        public ActionResult LogIn()
+        public ActionResult LogIn(UserLogin login)
         {
             string debugDBConnection = ConfigurationManager.ConnectionStrings["BugTrackerDB"].ConnectionString;
             SqlConnection sqlConn = new SqlConnection(debugDBConnection);
             SqlCommand sqlComm = new SqlCommand("select * from [db].[employee] where Username = @Username and Password = @Password", sqlConn);
 
-            return View();
+            SqlConnection dc = new SqlConnection(debugDBConnection);
+            using (sqlComm)
+            {
+                var v = ("where a=>a.Username == model.UsernameID");
+            }
+
+                return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
