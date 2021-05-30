@@ -1,5 +1,3 @@
-D:\BugTracker\BugTracker\DataLibrary\obj\Debug\DataLibrary.csprojAssemblyReference.cache
-D:\BugTracker\BugTracker\DataLibrary\obj\Debug\DataLibrary.csproj.CoreCompileInputs.cache
 D:\BugTracker\BugTracker\DataLibrary\bin\Debug\DataLibrary.dll
 D:\BugTracker\BugTracker\DataLibrary\bin\Debug\DataLibrary.pdb
 D:\BugTracker\BugTracker\DataLibrary\bin\Debug\Dapper.dll
@@ -10,6 +8,8 @@ D:\BugTracker\BugTracker\DataLibrary\bin\Debug\Dapper.xml
 D:\BugTracker\BugTracker\DataLibrary\bin\Debug\Microsoft.IdentityModel.Logging.xml
 D:\BugTracker\BugTracker\DataLibrary\bin\Debug\Microsoft.IdentityModel.Protocols.xml
 D:\BugTracker\BugTracker\DataLibrary\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+D:\BugTracker\BugTracker\DataLibrary\obj\Debug\DataLibrary.csprojAssemblyReference.cache
+D:\BugTracker\BugTracker\DataLibrary\obj\Debug\DataLibrary.csproj.CoreCompileInputs.cache
 D:\BugTracker\BugTracker\DataLibrary\obj\Debug\DataLibrary.csproj.CopyComplete
 D:\BugTracker\BugTracker\DataLibrary\obj\Debug\DataLibrary.dll
 D:\BugTracker\BugTracker\DataLibrary\obj\Debug\DataLibrary.pdb
