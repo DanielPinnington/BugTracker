@@ -37,6 +37,16 @@ namespace BugTracker.Controllers
                     ModelState.AddModelError("EmailExists", "Email already exists");
                     return View(user);
                 }
+
+                #region Generate Activation Code
+                user.ActivationCode = Guid.NewGuid();
+                #endregion
+
+                #region Password Hashing
+                user.Password = Crypto.Hash(user.Password);
+                user.ConfirmPassword = Crypto.Hash(user.ConfirmPassword);
+                #endregion
+                user.IsEmailVerified = false;
             }
             else
             {
