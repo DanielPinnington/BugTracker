@@ -47,6 +47,16 @@ namespace BugTracker.Controllers
                 user.ConfirmPassword = Crypto.Hash(user.ConfirmPassword);
                 #endregion
                 user.IsEmailVerified = false;
+
+
+                #region Save to Database
+                using (BugTrackerDBEntities dc = new BugTrackerDBEntities())
+                {
+                    dc.Users.Add(user);
+                    dc.Configuration.ValidateOnSaveEnabled = false;
+                    dc.SaveChanges();
+                }
+                #endregion
             }
             else
             {
