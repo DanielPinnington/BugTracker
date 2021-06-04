@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
@@ -55,13 +57,21 @@ namespace BugTracker.Controllers
                     dc.Users.Add(user);
                     dc.Configuration.ValidateOnSaveEnabled = false;
                     dc.SaveChanges();
+
+                    SendVerificationLinkEmail(user.EmailID, user.ActivationCode.ToString());
+                    message = "Registration successfully done. Account activation link has been sent to your email ID:" + user.EmailID;
+                    Status = true;
+
                 }
+
                 #endregion
             }
             else
             {
                 message = "Invalid Request";
             }
+            ViewBag.Message = message;
+            ViewBag.Status = Status;
             return View();
         }
 
@@ -74,5 +84,43 @@ namespace BugTracker.Controllers
                 return v != null;
             }
         }
+
+        [NonAction]
+        public void SendVerificationLinkEmail(string emailID, string activationCode)
+        {
+            var scheme = Request.Url.Scheme;
+            var host = Request.Url.Host;
+            var port = Request.Url.Port;
+
+            var verifyURL = "/User/VerifyAccount" + activationCode;
+            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyURL);
+
+            var fromEmail = new MailAddress("BugTrackerTest12@gmail.com");
+            var toEmail = new MailAddress(emailID);
+            var fromEmailPassword = "cazhdkrjmgedcqll";
+            string subject = "Your account is successfully created!";
+
+            string body = "<br/><br/> We are excited to tell you that your BugTracker account is " +
+                            " successfully created! Please click on the below link to verify your account" +
+                            "<br/><br/><a href='"+link+"'>"+link+"</a> ";
+
+            var smtp = new SmtpClient
+            {
+                EnableSsl = true,
+                Host = "smtp.gmail.com",
+                Port = 587,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromEmail.Address, fromEmailPassword)
+            };
+
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+                smtp.Send(message);
+            }
+        }
     }
-}
