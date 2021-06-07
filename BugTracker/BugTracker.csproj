@@ -231,6 +231,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\UserLogin.cshtml" />
+    <Content Include="Views\User\VerifyAccount.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

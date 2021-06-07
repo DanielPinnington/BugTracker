@@ -75,6 +75,30 @@ namespace BugTracker.Controllers
             return View();
         }
 
+
+        [HttpGet]
+        public ActionResult VerifyAccount(string id)//activation code
+        {
+            bool Status = false;
+
+            using (BugTrackerDBEntities dc = new BugTrackerDBEntities)
+            {
+                dc.Configuration.ValidateOnSaveEnabled = false; //This is to avoid confirm password (does not match) issue
+                var v = dc.Users.Where(a => a.ActivationCode == new Guid(id)).FirstOrDefault();
+                if(v != null)
+                {
+                    v.IsEmailVerified = true;
+                    dc.SaveChanges();
+                    Status = true;
+                }
+                else
+                {
+                    ViewBag.Message = "Invalid Request";
+                }
+            }
+            ViewBag.Status = true;
+            return View();
+        }
         [NonAction]
         public bool DoesEmailExist(string emailID)
         {
