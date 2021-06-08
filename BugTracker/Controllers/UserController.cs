@@ -7,6 +7,7 @@ using System.Net.Mail;
 using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace BugTracker.Controllers
 {
@@ -106,6 +107,61 @@ namespace BugTracker.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(UserLogin login, string ReturnURL="")
+        {
+            string message = "";
+            using(BugTrackerDBEntities dc = new BugTrackerDBEntities())
+            {
+                var v = dc.Users.Where(a => a.EmailID == login.emailID).FirstOrDefault();
+                if(v != null)
+                {
+                    if(string.Compare(Crypto.Hash(login.Password), v.Password) == 0)
+                    {
+                        int timeout = login.RememberMe ? 525600 : 20; //If remember me, remember this for one year! (525600)
+                        var ticket = new FormsAuthenticationTicket(login.emailID, login.RememberMe, timeout);
+                        string encrypted = FormsAuthentication.Encrypt(ticket);
+                        var cookie = new HttpCookie(FormsAuthentication.FormsCookieName,encrypted);
+                        cookie.Expires = DateTime.Now.AddMinutes(timeout); //ONE YEAR (TIMEOUT)
+                        cookie.HttpOnly = true;
+
+                        Response.Cookies.Add(cookie);
+
+                        if (Url.IsLocalUrl(ReturnURL))
+                        {
+                            return Redirect(ReturnURL);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                }
+                else
+                {
+                    message = "Invalid Credentials";
+                }
+            }
+            ViewBag.Message = "";
+
+            return View();
+        }
+
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Logout()
+        {
+
+            FormsAuthentication.SignOut();
+
+
+            return RedirectToAction("Login", "User");
+        }
+
+
 
         [NonAction]
         public bool DoesEmailExist(string emailID)
