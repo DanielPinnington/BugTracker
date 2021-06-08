@@ -81,7 +81,7 @@ namespace BugTracker.Controllers
         {
             bool Status = false;
 
-            using (BugTrackerDBEntities dc = new BugTrackerDBEntities)
+            using (BugTrackerDBEntities dc = new BugTrackerDBEntities())
             {
                 dc.Configuration.ValidateOnSaveEnabled = false; //This is to avoid confirm password (does not match) issue
                 var v = dc.Users.Where(a => a.ActivationCode == new Guid(id)).FirstOrDefault();
@@ -99,6 +99,14 @@ namespace BugTracker.Controllers
             ViewBag.Status = true;
             return View();
         }
+
+        public ActionResult Login()
+        {
+
+
+            return View();
+        }
+
         [NonAction]
         public bool DoesEmailExist(string emailID)
         {
@@ -116,7 +124,7 @@ namespace BugTracker.Controllers
             var host = Request.Url.Host;
             var port = Request.Url.Port;
 
-            var verifyURL = "/User/VerifyAccount" + activationCode;
+            var verifyURL = "/User/VerifyAccount/" + activationCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyURL);
 
             var fromEmail = new MailAddress("BugTrackerTest12@gmail.com");

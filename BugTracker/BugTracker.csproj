@@ -170,6 +170,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +233,7 @@
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\UserLogin.cshtml" />
     <Content Include="Views\User\VerifyAccount.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -7,10 +7,16 @@ using System.Web;
 namespace BugTracker.Models
 {
     public class UserLogin
-    {
-        [Display(Name = "Username ID")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "Username Required")]
+    {  
+        [Display(Name = "Email ID")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email ID Required")]
+        public string emailID { get; set; }
 
-        public string usernameID { get; set; }
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email ID Required")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [Display(Name ="Remember Me")]
+        public bool RememberMe { get; set; }
     }
 }
