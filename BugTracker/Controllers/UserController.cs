@@ -180,7 +180,7 @@ namespace BugTracker.Controllers
             var host = Request.Url.Host;
             var port = Request.Url.Port;
 
-            var verifyURL = "/User/"+ emailFor +"/ " + activationCode;
+            var verifyURL = "/User/"+ emailFor +"/" + activationCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyURL);
 
             var fromEmail = new MailAddress("BugTrackerTest12@gmail.com");
@@ -189,7 +189,7 @@ namespace BugTracker.Controllers
 
             string subject = "";
             string body = "";
-            if (emailID == "VerifyAccount")
+            if (emailFor == "VerifyAccount")
             {
 
                 subject = "Your account is successfully created!";
@@ -259,5 +259,12 @@ namespace BugTracker.Controllers
 
             return View();
             }
+        
+            //public ActionResult ResetPassword(string id)
+            //{
+                //Verify the password link
+                //Find the account associated with the link.
+                //Provide reset password page view.
+            //}
         }
     }
