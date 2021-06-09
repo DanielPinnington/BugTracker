@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="BugTrackerDBModel.User">
         <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="ResetPasswordCode" ColumnName="ResetPasswordCode" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="UsernameID" ColumnName="UsernameID" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />

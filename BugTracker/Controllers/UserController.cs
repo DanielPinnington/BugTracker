@@ -174,24 +174,36 @@ namespace BugTracker.Controllers
         }
 
         [NonAction]
-        public void SendVerificationLinkEmail(string emailID, string activationCode)
+        public void SendVerificationLinkEmail(string emailID, string activationCode, string emailFor = "VerifyAccount")
         {
             var scheme = Request.Url.Scheme;
             var host = Request.Url.Host;
             var port = Request.Url.Port;
 
-            var verifyURL = "/User/VerifyAccount/" + activationCode;
+            var verifyURL = "/User/"+ emailFor +"/ " + activationCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyURL);
 
             var fromEmail = new MailAddress("BugTrackerTest12@gmail.com");
             var toEmail = new MailAddress(emailID);
             var fromEmailPassword = "cazhdkrjmgedcqll";
-            string subject = "Your account is successfully created!";
 
-            string body = "<br/><br/> We are excited to tell you that your BugTracker account is " +
-                            " successfully created! Please click on the below link to verify your account" +
-                            "<br/><br/><a href='"+link+"'>"+link+"</a> ";
+            string subject = "";
+            string body = "";
+            if (emailID == "VerifyAccount")
+            {
 
+                subject = "Your account is successfully created!";
+                body = "<br/><br/> We are excited to tell you that your BugTracker account is " +
+                                " successfully created! Please click on the below link to verify your account" +
+                                "<br/><br/><a href='" + link + "'>" + link + "</a> ";
+
+            }
+            else if (emailFor == "ResetPassword")
+            {
+                subject = "Reset Password";
+                body = "Hi, <br/>br/>We got a request to reset your account, please click on the below link to reset your password." +
+                    "<br/><br/><a href='" + link+">Reset Password Link</a> ";
+            }
             var smtp = new SmtpClient
             {
                 EnableSsl = true,
@@ -229,6 +241,14 @@ namespace BugTracker.Controllers
                 if(account != null)
                 {
                     //Send email to reset the password
+                    string resetCode = Guid.NewGuid().ToString();
+                    SendVerificationLinkEmail(account.EmailID, resetCode, "ResetPassword");
+                    account.ResetPasswordCode = resetCode;
+
+                    //This line I have added here to avoid confirm password not match issue, as we had added a confirm password property.
+                    
+                    dc.Configuration.ValidateOnSaveEnabled = false;
+                    dc.SaveChanges();
                 }
                 else
                 {
