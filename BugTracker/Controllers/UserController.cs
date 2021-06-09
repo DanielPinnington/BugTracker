@@ -210,5 +210,34 @@ namespace BugTracker.Controllers
             })
                 smtp.Send(message);
             }
+
+            public ActionResult ForgottenPassword()
+            {
+                return View();
+            }
+
+        [HttpPost]
+            public ActionResult ForgottenPassword(string EmailID)
+            {
+            //Verify Email Address
+            string message = "";
+            bool status = false;
+
+            using(BugTrackerDBEntities dc = new BugTrackerDBEntities())
+            {
+                var account = dc.Users.Where(a => a.EmailID == EmailID).FirstOrDefault();
+                if(account != null)
+                {
+                    //Send email to reset the password
+                }
+                else
+                {
+                    message = "Email Address not found!";
+                }
+            }
+
+
+            return View();
+            }
         }
     }
