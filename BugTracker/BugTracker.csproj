@@ -146,6 +146,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TicketController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -153,6 +154,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Extended\AdUser.cs" />
     <Compile Include="Models\Extended\User.cs" />
     <Compile Include="Models\MyModel.Context.cs">
       <AutoGen>True</AutoGen>
@@ -239,6 +241,9 @@
     <Content Include="Views\User\VerifyAccount.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\ForgottenPassword.cshtml" />
+    <Content Include="Views\Admin\AdRegistration.cshtml" />
+    <Content Include="Views\User\AdRegistration.cshtml" />
+    <Content Include="Views\Admin\AdminRegistration.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
