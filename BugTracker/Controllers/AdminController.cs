@@ -1,4 +1,5 @@
 ﻿using BugTracker.Models;
+using Google.Apis.Admin.Directory.directory_v1.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace BugTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Registration([Bind(Exclude = "IsEmailVerified, ActivationCode")] User user)
+        public ActionResult AdminRegistration([Bind(Exclude = "IsEmailVerified, ActivationCode")] Admin user)
         {
             bool Status = false;
             string message = "";
@@ -52,9 +53,9 @@ namespace BugTracker.Controllers
 
 
                 #region Save to Database
-                using (BugTrackerDBEntities dc = new BugTrackerDBEntities())
+                using (BugTrackerDBEntities2 dc = new BugTrackerDBEntities2())
                 {
-                    dc.Users.Add(user);
+                    dc.Admins.Add(user);
                     dc.Configuration.ValidateOnSaveEnabled = false;
                     dc.SaveChanges();
 

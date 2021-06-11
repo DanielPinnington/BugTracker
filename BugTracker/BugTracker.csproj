@@ -154,6 +154,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin.cs">
+      <DependentUpon>AdminDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdminDB.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Extended\AdUser.cs" />
     <Compile Include="Models\Extended\User.cs" />
     <Compile Include="Models\MyModel.Context.cs">
@@ -192,6 +210,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\AdminDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdminDB.edmx</DependentUpon>
+      <LastGenOutput>AdminDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\AdminDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>AdminDB.edmx</DependentUpon>
+      <LastGenOutput>AdminDB.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\MyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MyModel.edmx</DependentUpon>
@@ -210,6 +238,13 @@
     </EntityDeploy>
     <Content Include="Models\MyModel.edmx.diagram">
       <DependentUpon>MyModel.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\AdminDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AdminDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AdminDB.edmx.diagram">
+      <DependentUpon>AdminDB.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
