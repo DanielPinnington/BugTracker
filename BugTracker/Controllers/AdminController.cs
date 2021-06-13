@@ -14,6 +14,7 @@ namespace BugTracker.Controllers
 {
     public class AdminController : Controller
     {
+
         public ActionResult Index()
         {
             return View();
@@ -26,7 +27,7 @@ namespace BugTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult AdminRegistration([Bind(Exclude = "IsEmailVerified, ActivationCode")] Admin user)
+        public ActionResult AdminRegistration([Bind(Exclude = "IsEmailVerified, ActivationCode")] Admin admin)
         {
             bool Status = false;
             string message = "";
@@ -34,33 +35,33 @@ namespace BugTracker.Controllers
             if (ModelState.IsValid)
             {
                 //Email already exists
-                var doesExist = DoesEmailExist(user.EmailID);
+                var doesExist = DoesEmailExist(admin.EmailID);
                 if (doesExist)
                 {
                     ModelState.AddModelError("EmailExists", "Email already exists");
-                    return View(user);
+                    return View(admin);
                 }
 
                 #region Generate Activation Code
-                user.ActivationCode = Guid.NewGuid();
+                admin.ActivationCode = Guid.NewGuid();
                 #endregion
 
                 #region Password Hashing
-                user.Password = Crypto.Hash(user.Password);
-                user.ConfirmPassword = Crypto.Hash(user.ConfirmPassword);
+                admin.Password = Crypto.Hash(admin.Password);
+                admin.ConfirmPassword = Crypto.Hash(admin.ConfirmPassword);
                 #endregion
-                user.IsEmailVerified = false;
+                admin.IsEmailVerified = false;
 
 
                 #region Save to Database
                 using (BugTrackerDBEntities2 dc = new BugTrackerDBEntities2())
                 {
-                    dc.Admins.Add(user);
+                    dc.Admins.Add(admin);
                     dc.Configuration.ValidateOnSaveEnabled = false;
                     dc.SaveChanges();
 
-                    SendVerificationLinkEmail(user.EmailID, user.ActivationCode.ToString());
-                    message = "Registration successfully done. Account activation link has been sent to your email ID:" + user.EmailID;
+                    SendVerificationLinkEmail(admin.EmailID, admin.ActivationCode.ToString());
+                    message = "Registration successfully done. Account activation link has been sent to your email ID:" + admin.EmailID;
                     Status = true;
 
                 }
@@ -109,6 +110,7 @@ namespace BugTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+    
         public ActionResult AdminLogin(AdminLogin login, string ReturnURL = "")
         {
             string message = "";
@@ -131,6 +133,7 @@ namespace BugTracker.Controllers
                         if (Url.IsLocalUrl(ReturnURL))
                         {
                             return Redirect(ReturnURL);
+                            
                         }
                         else
                         {
@@ -144,7 +147,7 @@ namespace BugTracker.Controllers
                 }
             }
             ViewBag.Message = "";
-
+          
             return View();
         }
 

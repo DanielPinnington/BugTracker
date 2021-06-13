@@ -1,4 +1,5 @@
 ﻿using BugTracker.Models;
+//using Google.Apis.Admin.Directory.directory_v1.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace BugTracker.Controllers
 {
     public class UserController : Controller
     {
+        [Authorize(Roles = "Admin")]
         // GET: User
         public ActionResult Index()
         {

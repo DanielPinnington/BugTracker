@@ -22,31 +22,21 @@
             </div>
             @if (@HttpContext.Current.User.Identity.IsAuthenticated)
             {
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("User", "Registration", "User")</li>
-                        <li>@Html.ActionLink("VerifyAccount", "VerifyAccount", "User")</li>
-                        <li>@Html.ActionLink("User", "AdminRegistration", "Admin")</li>
+                BugTracker.Models.BugTrackerDBEntities2 dc = new BugTracker.Models.BugTrackerDBEntities2();
+                var account = dc.Admins.Where(a => a.EmailID == HttpContext.Current.User.Identity.Name).FirstOrDefault();
 
-
-                    </ul>
-                </div>
-            }
-            else
-            {
-
-            }
-            @if (@HttpContext.Current.User.IsInRole("Admin"))
-            {
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        
-                        <li>@Html.ActionLink("User", "UserLogin", "User")</li>
-
-
-                    </ul>
-                </div>
-            }
+                if(account != null)
+                {
+                            <div class="navbar-collapse collapse">
+                                <ul class="nav navbar-nav">
+                                    <li>@Html.ActionLink("User", "Registration", "User")</li>
+                                    <li>@Html.ActionLink("VerifyAccount", "VerifyAccount", "User")</li>
+                                    <li>@Html.ActionLink("User", "UserLogin", "User")</li>
+                                    <li>@Html.ActionLink("User", "AdminRegistration", "Admin")</li>
+                                </ul>
+                            </div>
+                        }
+                    }
         </div>
     </div>
     <div class="container body-content">
