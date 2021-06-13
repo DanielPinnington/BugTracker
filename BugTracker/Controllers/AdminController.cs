@@ -101,21 +101,20 @@ namespace BugTracker.Controllers
             return View();
         }
 
-        public ActionResult Login()
+        public ActionResult AdminLogin()
         {
-
 
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(UserLogin login, string ReturnURL = "")
+        public ActionResult AdminLogin(AdminLogin login, string ReturnURL = "")
         {
             string message = "";
-            using (BugTrackerDBEntities dc = new BugTrackerDBEntities())
+            using (BugTrackerDBEntities2 dc = new BugTrackerDBEntities2())
             {
-                var v = dc.Users.Where(a => a.EmailID == login.emailID).FirstOrDefault();
+                var v = dc.Admins.Where(a => a.EmailID == login.emailID).FirstOrDefault();
                 if (v != null)
                 {
                     if (string.Compare(Crypto.Hash(login.Password), v.Password) == 0)
@@ -166,9 +165,9 @@ namespace BugTracker.Controllers
         [NonAction]
         public bool DoesEmailExist(string emailID)
         {
-            using (BugTrackerDBEntities dc = new BugTrackerDBEntities())
+            using (BugTrackerDBEntities2 dc = new BugTrackerDBEntities2())
             {
-                var v = dc.Users.Where(a => a.EmailID == emailID).FirstOrDefault();
+                var v = dc.Admins.Where(a => a.EmailID == emailID).FirstOrDefault();
                 return v != null;
             }
         }

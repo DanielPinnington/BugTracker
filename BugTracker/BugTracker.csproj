@@ -194,6 +194,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminLogin.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -276,9 +277,8 @@
     <Content Include="Views\User\VerifyAccount.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\ForgottenPassword.cshtml" />
-    <Content Include="Views\Admin\AdRegistration.cshtml" />
-    <Content Include="Views\User\AdRegistration.cshtml" />
     <Content Include="Views\Admin\AdminRegistration.cshtml" />
+    <Content Include="Views\Admin\AdminLogin.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

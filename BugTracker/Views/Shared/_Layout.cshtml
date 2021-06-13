@@ -25,7 +25,6 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("User", "Registration", "User")</li>
-                        <li>@Html.ActionLink("User", "UserLogin", "User")</li>
                         <li>@Html.ActionLink("VerifyAccount", "VerifyAccount", "User")</li>
                         <li>@Html.ActionLink("User", "AdminRegistration", "Admin")</li>
 
@@ -35,7 +34,18 @@
             }
             else
             {
-                   
+
+            }
+            @if (@HttpContext.Current.User.IsInRole("Admin"))
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        
+                        <li>@Html.ActionLink("User", "UserLogin", "User")</li>
+
+
+                    </ul>
+                </div>
             }
         </div>
     </div>
