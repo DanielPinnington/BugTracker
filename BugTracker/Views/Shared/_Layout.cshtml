@@ -25,20 +25,30 @@
                 BugTracker.Models.BugTrackerDBEntities2 dc = new BugTracker.Models.BugTrackerDBEntities2();
                 var account = dc.Admins.Where(a => a.EmailID == HttpContext.Current.User.Identity.Name).FirstOrDefault();
 
-                if(account != null)
+                if (account != null)
                 {
-                            <div class="navbar-collapse collapse">
-                                <ul class="nav navbar-nav">
-                                    <li>@Html.ActionLink("User", "Registration", "User")</li>
-                                    <li>@Html.ActionLink("VerifyAccount", "VerifyAccount", "User")</li>
-                                    <li>@Html.ActionLink("User", "UserLogin", "User")</li>
-                                    <li>@Html.ActionLink("User", "AdminRegistration", "Admin")</li>
-                                </ul>
-                            </div>
-                        }
-                    }
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("User", "Registration", "User")</li>
+                            <li>@Html.ActionLink("VerifyAccount", "VerifyAccount", "User")</li>
+                            <li>@Html.ActionLink("User", "UserLogin", "User")</li>
+                            <li>@Html.ActionLink("User", "AdminRegistration", "Admin")</li>
+
+                        </ul>
+                    </div>
+                }
+            }
+            @if (User.Identity.IsAuthenticated) // Checks if logged in or not within layout
+            {
+        <div class="topright"> Logged in : @HttpContext.Current.User.Identity.Name</div>
+            }
+            else
+            {
+                
+            }
+
         </div>
-    </div>
+                </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -46,7 +56,17 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
+    <style>
 
+        .topright {
+            position: absolute;
+            top: 8px;
+            right:200px;
+            font-size: 18px;
+            color: white;
+        }
+
+    </style>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
