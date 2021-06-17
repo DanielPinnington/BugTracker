@@ -230,6 +230,11 @@ namespace BugTracker.Controllers
                 return View();
             }
 
+        public ActionResult BugTracking()
+        {
+            return View();
+        }
+
         [HttpPost]
             public ActionResult ForgottenPassword(string EmailID)
             {

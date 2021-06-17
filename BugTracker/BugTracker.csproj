@@ -360,6 +360,7 @@
     <Content Include="Views\User\ForgottenPassword.cshtml" />
     <Content Include="Views\Admin\AdminRegistration.cshtml" />
     <Content Include="Views\Admin\AdminLogin.cshtml" />
+    <Content Include="Views\User\BugTracking.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
