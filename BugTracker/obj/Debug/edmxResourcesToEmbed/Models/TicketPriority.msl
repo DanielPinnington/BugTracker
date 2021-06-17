@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="BugTrackerDBModel2StoreContainer" CdmEntityContainer="BugTrackerDBEntities3">
+    <EntitySetMapping Name="TicketPriorities">
+      <EntityTypeMapping TypeName="BugTrackerDBModel2.TicketPriority">
+        <MappingFragment StoreEntitySet="TicketPriority">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Priority" ColumnName="Priority" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

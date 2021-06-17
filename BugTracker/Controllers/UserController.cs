@@ -230,9 +230,15 @@ namespace BugTracker.Controllers
                 return View();
             }
 
-        public ActionResult BugTracking()
+        public ActionResult BugTracking() //This will need changing soon (This is testing the drop down list priority) will need to try link it up with another DB
         {
-            return View();
+
+            TicketPriority tickets = new TicketPriority();
+            using(BugTrackerDBEntities3 db = new BugTrackerDBEntities3())
+            {
+                tickets.TicketImportance = db.TicketPriorities.ToList<TicketPriority>();
+            }
+            return View(tickets);
         }
 
         [HttpPost]

@@ -1,12 +1,31 @@
-﻿
-@if (User.Identity.IsAuthenticated)
+﻿@model BugTracker.Models.TicketPriority
+
+@using (Html.BeginForm())
 {
+    if (User.Identity.IsAuthenticated)
     {
-        ViewBag.Title = "BugTracking";
+        {
+            ViewBag.Title = "BugTracking";
+        }
+        <h2>BugTracking</h2>
+
+        <body>
+            <table>
+                <tr>
+                    <td style="text-decoration: underline">Priority</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Priority)</td>
+
+                    <td>@Html.DropDownListFor(model => model.Priority, new SelectList(Model.TicketImportance, "Id", "Priority", "Select"), new { @class = "form-control" })   </td>
+
+                </tr>
+            </table>
+        </body>
     }
-    <h2>BugTracking</h2>
-}
-else
-{
-    <h1> BIG PROBLEM</h1>
+    else
+    {
+        <h1> BIG PROBLEM</h1>
+    }
+
 }

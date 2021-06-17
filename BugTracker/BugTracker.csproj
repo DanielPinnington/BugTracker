@@ -269,7 +269,24 @@
       <DependentUpon>MyModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ResetPasswordModel.cs" />
-    <Compile Include="Models\Ticket.cs" />
+    <Compile Include="Models\TicketPriority.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TicketPriority.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TicketPriority.cs">
+      <DependentUpon>TicketPriority.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TicketPriority.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TicketPriority.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TicketPriority1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TicketPriority.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\User.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -312,6 +329,16 @@
       <DependentUpon>MyModel.edmx</DependentUpon>
       <LastGenOutput>MyModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\TicketPriority.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TicketPriority.edmx</DependentUpon>
+      <LastGenOutput>TicketPriority.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\TicketPriority.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TicketPriority.edmx</DependentUpon>
+      <LastGenOutput>TicketPriority1.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <EntityDeploy Include="Models\MyModel.edmx">
@@ -327,6 +354,13 @@
     </EntityDeploy>
     <Content Include="Models\AdminDB.edmx.diagram">
       <DependentUpon>AdminDB.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\TicketPriority.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TicketPriority.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TicketPriority.edmx.diagram">
+      <DependentUpon>TicketPriority.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
