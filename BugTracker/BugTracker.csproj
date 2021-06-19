@@ -251,6 +251,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AdminDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\BugTracking.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BugTracking.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BugTracking.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BugTracking.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BugTracking.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BugTracking.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Extended\AdUser.cs" />
     <Compile Include="Models\Extended\User.cs" />
     <Compile Include="Models\MyModel.Context.cs">
@@ -269,24 +284,25 @@
       <DependentUpon>MyModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ResetPasswordModel.cs" />
-    <Compile Include="Models\TicketPriority.Context.cs">
+    <Compile Include="Models\Ticket.cs">
+      <DependentUpon>BugTracking.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TicketSystemDB.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TicketPriority.Context.tt</DependentUpon>
+      <DependentUpon>TicketSystemDB.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TicketPriority.cs">
-      <DependentUpon>TicketPriority.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TicketPriority.Designer.cs">
+    <Compile Include="Models\TicketSystemDB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TicketPriority.edmx</DependentUpon>
+      <DependentUpon>TicketSystemDB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\TicketPriority1.cs">
+    <Compile Include="Models\TicketSystemDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TicketPriority.tt</DependentUpon>
+      <DependentUpon>TicketSystemDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\TicketSystemModel.cs" />
     <Compile Include="Models\User.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
@@ -319,6 +335,16 @@
       <DependentUpon>AdminDB.edmx</DependentUpon>
       <LastGenOutput>AdminDB.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\BugTracking.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BugTracking.edmx</DependentUpon>
+      <LastGenOutput>BugTracking.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\BugTracking.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BugTracking.edmx</DependentUpon>
+      <LastGenOutput>BugTracking.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\MyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MyModel.edmx</DependentUpon>
@@ -329,15 +355,15 @@
       <DependentUpon>MyModel.edmx</DependentUpon>
       <LastGenOutput>MyModel.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\TicketPriority.Context.tt">
+    <Content Include="Models\TicketSystemDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TicketPriority.edmx</DependentUpon>
-      <LastGenOutput>TicketPriority.Context.cs</LastGenOutput>
+      <DependentUpon>TicketSystemDB.edmx</DependentUpon>
+      <LastGenOutput>TicketSystemDB.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\TicketPriority.tt">
+    <Content Include="Models\TicketSystemDB.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TicketPriority.edmx</DependentUpon>
-      <LastGenOutput>TicketPriority1.cs</LastGenOutput>
+      <DependentUpon>TicketSystemDB.edmx</DependentUpon>
+      <LastGenOutput>TicketSystemDB.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -355,12 +381,19 @@
     <Content Include="Models\AdminDB.edmx.diagram">
       <DependentUpon>AdminDB.edmx</DependentUpon>
     </Content>
-    <EntityDeploy Include="Models\TicketPriority.edmx">
+    <EntityDeploy Include="Models\TicketSystemDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TicketPriority.Designer.cs</LastGenOutput>
+      <LastGenOutput>TicketSystemDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\TicketPriority.edmx.diagram">
-      <DependentUpon>TicketPriority.edmx</DependentUpon>
+    <Content Include="Models\TicketSystemDB.edmx.diagram">
+      <DependentUpon>TicketSystemDB.edmx</DependentUpon>
+    </Content>
+    <EntityDeploy Include="Models\BugTracking.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BugTracking.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\BugTracking.edmx.diagram">
+      <DependentUpon>BugTracking.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -395,6 +428,7 @@
     <Content Include="Views\Admin\AdminRegistration.cshtml" />
     <Content Include="Views\Admin\AdminLogin.cshtml" />
     <Content Include="Views\User\BugTracking.cshtml" />
+    <Content Include="Views\User\TicketSystem.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

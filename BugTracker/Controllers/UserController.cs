@@ -2,6 +2,7 @@
 //using Google.Apis.Admin.Directory.directory_v1.Data;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -9,6 +10,7 @@ using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI.WebControls;
 
 namespace BugTracker.Controllers
 {
@@ -105,8 +107,6 @@ namespace BugTracker.Controllers
 
         public ActionResult Login()
         {
-
-
             return View();
         }
 
@@ -233,18 +233,42 @@ namespace BugTracker.Controllers
         public ActionResult BugTracking() //This will need changing soon (This is testing the drop down list priority) will need to try link it up with another DB
         {
 
-            TicketPriority tickets = new TicketPriority();
-            using(BugTrackerDBEntities3 db = new BugTrackerDBEntities3())
-            {
-                tickets.TicketImportance = db.TicketPriorities.ToList<TicketPriority>();
-            }
-         return View(tickets);
+           // TicketPriority tickets = new TicketPriority();
+           // using(BugTrackerDBEntities3 db = new BugTrackerDBEntities3())
+           // {
+           //     tickets.TicketImportance = db.TicketPriorities.ToList<TicketPriority>();
+           // }
+         return View(); //(Tickets)
         }
-        [HttpPost]
-        public ActionResult BugTracking(TicketPriority ticket)
+
+
+        public ActionResult TicketSystem()
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult TicketSystem(Ticket user)
+        {
+            TicketSystemModel pr = new TicketSystemModel();
+           // var ticketPriority = pr.Priority.ToList();
+
+          // ticketPriority.Add("Low");
+         //   ticketPriority.Add("Medium");
+          //  ticketPriority.Add("High");
+
+            Ticket tickets = new Ticket();
+            using(BugTracking db = new Models.BugTracking())
+            {
+                
+                db.Tickets.Add(user);
+                db.Configuration.ValidateOnSaveEnabled = false;
+                db.SaveChanges();
+
+            }
+            return View();
+        }
+
         [HttpPost]
             public ActionResult ForgottenPassword(string EmailID)
             {
