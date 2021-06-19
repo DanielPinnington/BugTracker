@@ -238,9 +238,13 @@ namespace BugTracker.Controllers
             {
                 tickets.TicketImportance = db.TicketPriorities.ToList<TicketPriority>();
             }
-            return View(tickets);
+         return View(tickets);
         }
-
+        [HttpPost]
+        public ActionResult BugTracking(TicketPriority ticket)
+        {
+            return View();
+        }
         [HttpPost]
             public ActionResult ForgottenPassword(string EmailID)
             {
