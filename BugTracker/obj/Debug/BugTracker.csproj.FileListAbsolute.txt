@@ -94,7 +94,6 @@ D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.csproj.CoreCompileInput
 D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.csproj.CopyComplete
 D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.dll
 D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.pdb
-D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.csprojAssemblyReference.cache
 D:\BugTracker\BugTracker\BugTracker\bin\Microsoft.AspNet.Identity.Core.dll
 D:\BugTracker\BugTracker\BugTracker\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\BugTracker\BugTracker\BugTracker\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -145,3 +144,4 @@ D:\BugTracker\BugTracker\BugTracker\bin\System.Numerics.Vectors.xml
 D:\BugTracker\BugTracker\BugTracker\bin\System.Runtime.CompilerServices.Unsafe.xml
 D:\BugTracker\BugTracker\BugTracker\bin\System.Threading.Tasks.Extensions.xml
 D:\BugTracker\BugTracker\BugTracker\bin\System.ValueTuple.xml
+D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.csprojAssemblyReference.cache

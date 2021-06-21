@@ -39,10 +39,10 @@ namespace BugTracker.MyRoleProvider
 
         public override string[] GetRolesForUser(string username)
         {
-            BugTrackerDBEntities db = new BugTrackerDBEntities();
-            string data = db.Users.Where(x => x.UsernameID == username).FirstOrDefault().UsernameID;
-            string[] result = { data };
-            return result;
+           // BugTrackerDBEntities db = new BugTrackerDBEntities();
+           // string data = db.Users.Where(x => x.UsernameID == username).FirstOrDefault().UsernameID;
+           // string[] result = { data };
+            throw new NotImplementedException();
 
         }
 
