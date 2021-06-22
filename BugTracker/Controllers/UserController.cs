@@ -307,5 +307,12 @@ namespace BugTracker.Controllers
                 //Find the account associated with the link.
                 //Provide reset password page view.
             //}
+
+        public ActionResult TicketsView(Ticket user)
+        {
+            BugTracking db = new BugTracking();
+
+            return View(db.Tickets.ToList());
         }
     }
+}
