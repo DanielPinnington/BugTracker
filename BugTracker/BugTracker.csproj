@@ -429,6 +429,7 @@
     <Content Include="Views\Admin\AdminLogin.cshtml" />
     <Content Include="Views\User\TicketSystem.cshtml" />
     <Content Include="Views\User\TicketsView.cshtml" />
+    <Content Include="Views\User\ResetPassword.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

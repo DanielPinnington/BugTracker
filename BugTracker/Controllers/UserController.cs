@@ -290,6 +290,7 @@ namespace BugTracker.Controllers
                     
                     dc.Configuration.ValidateOnSaveEnabled = false;
                     dc.SaveChanges();
+                    message = "Reset Password request has been sent to your email.";
                 }
                 else
                 {
@@ -297,17 +298,62 @@ namespace BugTracker.Controllers
                 }
             }
 
-
+            ViewBag.Message = message;
             return View();
             }
         
-            //public ActionResult ResetPassword(string id)
-            //{
-                //Verify the password link
-                //Find the account associated with the link.
-                //Provide reset password page view.
-            //}
+            public ActionResult ResetPassword(string id)
+            {
+            //Verify the password link
+            //Find the account associated with the link.
+            //Provide reset password page view.
+            using(BugTrackerDBEntities dc = new BugTrackerDBEntities())
+            {
+                var user = dc.Users.Where(a => a.ResetPasswordCode == id).FirstOrDefault();
+                if(user != null)
+                {
+                    ResetPasswordModel model = new ResetPasswordModel();
+                    model.ResetCode = id;
+                    return View(model);
+                }
+                else
+                {
+                    return HttpNotFound();
+                }
+            }
+            return View();
+            }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(ResetPasswordModel model)
+        {
+            var message = "";
+            if (ModelState.IsValid)
+            {
+                using (BugTrackerDBEntities dc = new BugTrackerDBEntities())
+                {
+                    var user = dc.Users.Where(a => a.ResetPasswordCode == model.ResetCode).FirstOrDefault();
+                    if(user != null)
+                    {
+                        user.Password = Crypto.Hash(model.NewPassword); //Hash so no1 can find password in database
+                        user.ResetPasswordCode = "";
+
+                        dc.Configuration.ValidateOnSaveEnabled = false;
+                        dc.SaveChanges();
+                        message = "New password updated successfully!";
+
+                    }
+                }
+            }
+            else
+            {
+                message = "Something invalid";
+            }
+
+            ViewBag.Message = message;
+            return View(model);
+        }
         public ActionResult TicketsView(Ticket user)
         {
             BugTracking db = new BugTracking();
