@@ -1,4 +1,4 @@
-﻿@using BugTracker.Models
+﻿
 @model IEnumerable<BugTracker.Models.Ticket>
 
 @{
@@ -8,7 +8,7 @@
 <h2>TicketsView</h2>
 
 <p>
-    @Html.ActionLink("Create New", "TicketSystem")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -23,6 +23,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Priorities)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentUser)
         </th>
         <th></th>
     </tr>
@@ -40,24 +43,15 @@
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
-                @Html.DropDownListFor(modelItem => item.Priorities,
-                 new SelectList(Enum.GetValues(typeof(Priority))),
-                 item.Priorities)
+                @Html.DisplayFor(modelItem => item.Priorities)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                @Html.ActionLink("Details", "Details", new { id = item.Id })
-
-                @if (@HttpContext.Current.User.Identity.IsAuthenticated)
-                {
-                    BugTracker.Models.BugTrackerDBEntities2 dc = new BugTracker.Models.BugTrackerDBEntities2();
-                    var account = dc.Admins.Where(a => a.EmailID == HttpContext.Current.User.Identity.Name).FirstOrDefault();
-
-                    if (account != null)
-                    {
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    }
-                }
+                @Html.DisplayFor(modelItem => item.CurrentUser)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }

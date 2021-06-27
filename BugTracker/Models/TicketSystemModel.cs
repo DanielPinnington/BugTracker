@@ -29,7 +29,24 @@ namespace BugTracker.Models
 
         public Priority Priorities { get; set; }
 
+
+        [Display(Name = "CurrentUser")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Username")]
+
+        string currentUsername = HttpContext.Current.User.Identity.Name;
+        public string CurrentUser
+        {
+            get
+            {
+                return currentUsername.ToString();
+            }
+            set
+            {
+                currentUsername = value;
+            }
+        }
     }
+
     public enum Priority
     {
         Low,

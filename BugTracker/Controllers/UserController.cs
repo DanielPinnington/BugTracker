@@ -251,11 +251,16 @@ namespace BugTracker.Controllers
         public ActionResult TicketSystem(Ticket user)
         {
             TicketSystemModel pr = new TicketSystemModel();
-           // var ticketPriority = pr.Priority.ToList();
+            // var ticketPriority = pr.Priority.ToList();
 
-          // ticketPriority.Add("Low");
-         //   ticketPriority.Add("Medium");
-          //  ticketPriority.Add("High");
+            // ticketPriority.Add("Low");
+            //   ticketPriority.Add("Medium");
+            //  ticketPriority.Add("High");
+
+
+            //string currentUsername = HttpContext.User.Identity.Name.ToString();
+
+            ViewBag.CurrentUser = HttpContext.User.Identity.Name;
 
             Ticket tickets = new Ticket();
             using(BugTracking db = new Models.BugTracking())

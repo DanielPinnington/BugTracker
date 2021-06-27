@@ -308,7 +308,6 @@
     </Compile>
     <Compile Include="Models\AdminLogin.cs" />
     <Compile Include="Models\UserLogin.cs" />
-    <Compile Include="MyRoleProvider\SiteRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -431,7 +430,9 @@
     <Content Include="Views\User\TicketsView.cshtml" />
     <Content Include="Views\User\ResetPassword.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MyRoleProvider\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

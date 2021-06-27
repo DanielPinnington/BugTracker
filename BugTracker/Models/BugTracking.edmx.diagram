@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="386f028d1bc1414cb88642594bf0387f" Name="Diagram1">
-        <EntityTypeShape EntityType="BugTrackerDBModel3.Ticket" Width="1.5" PointX="1" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BugTrackerDBModel3.Ticket" Width="1.5" PointX="1" PointY="1.375" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
