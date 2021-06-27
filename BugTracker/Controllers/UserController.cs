@@ -117,13 +117,15 @@ namespace BugTracker.Controllers
             string message = "";
             using(BugTrackerDBEntities dc = new BugTrackerDBEntities())
             {
-                var v = dc.Users.Where(a => a.EmailID == login.emailID).FirstOrDefault();
+                var v = dc.Users.Where(a => a.UsernameID == login.emailID).FirstOrDefault();
+                //var v = dc.Users.Where(a => a.EmailID == login.emailID).FirstOrDefault(); EMAIL LOGIN
                 if(v != null)
                 {
                     if(string.Compare(Crypto.Hash(login.Password), v.Password) == 0)
                     {
                         int timeout = login.RememberMe ? 525600 : 20; //If remember me, remember this for one year! (525600)
-                        var ticket = new FormsAuthenticationTicket(login.emailID, login.RememberMe, timeout);
+                         var ticket = new FormsAuthenticationTicket(login.emailID, login.RememberMe, timeout);
+                        //var ticket = new FormsAuthenticationTicket(login.emailID, login.RememberMe, timeout); //EMAIL!
                         string encrypted = FormsAuthentication.Encrypt(ticket);
                         var cookie = new HttpCookie(FormsAuthentication.FormsCookieName,encrypted);
                         cookie.Expires = DateTime.Now.AddMinutes(timeout); //ONE YEAR (TIMEOUT)
