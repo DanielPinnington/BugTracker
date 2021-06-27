@@ -51,7 +51,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.CurrentUser, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.CurrentUser, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.TextBoxFor(model => model.CurrentUser, new { Value = HttpContext.Current.User.Identity.Name })
             @Html.ValidationMessageFor(model => model.CurrentUser, "", new { @class = "text-danger" })
         </div>
     </div>
