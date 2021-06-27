@@ -367,5 +367,15 @@ namespace BugTracker.Controllers
 
             return View(db.Tickets.ToList());
         }
+
+        [HttpPost]
+        public ActionResult DescriptionButton(string button)
+        {
+            if(button == "test")
+            {
+                bool hasBeenClicked = true;
+            }
+            return View("TicketsView");
+        }
     }
 }

@@ -4,15 +4,15 @@
 @{
     ViewBag.Title = "TicketsView";
 }
-
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <h2>TicketsView</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
+<table class="table" style="background-color: burlywood; >
+    <tr">
+        <th style="color: red;">
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
@@ -37,7 +37,9 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+
+                @Html.DisplayFor(modelItem => item.Description, new { @class = "hidden" })
+
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedDate)
@@ -49,7 +51,9 @@
                 @Html.DisplayFor(modelItem => item.CurrentUser)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id})
+
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
@@ -57,3 +61,12 @@
     }
 
 </table>
+<style>
+    .hidden {
+        display: none;
+    }
+    .someClass {
+        color: Green !important;
+    }
+</style>
+
