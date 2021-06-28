@@ -41,12 +41,17 @@
             }
             @if (User.Identity.IsAuthenticated) // Checks if logged in or not within layout
             {
-        <div class="topright"> Logged in : @HttpContext.Current.User.Identity.Name</div>
-            }
-            else
+        <div class="topright">
+            Logged in : @HttpContext.Current.User.Identity.Name
+
+            @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
             {
-                
+            <a href="javascript:document.getElementById('logoutForm').submit()" style="color: lightblue">Logout</a>
+
             }
+        </div>
+            }
+
 
         </div>
                 </div>
