@@ -1,10 +1,12 @@
-﻿@model List<BugTracker.Models.Ticket>
+﻿@using BugTracker.Models
+@model List<BugTracker.Models.Ticket>
 
 @{
     Layout = null;
     var grid = new WebGrid(canPage: true, rowsPerPage: 10);
     grid.Bind(source: Model, rowCount: ViewBag.TotalRows, autoSortAndPage: false);
 }
+
 
 <!DOCTYPE html>
 
@@ -13,6 +15,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="~/Scripts/gridmvc.min.js"></script>
+    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+
 </head>
 <body>
     <div class="container">
@@ -23,7 +30,7 @@
                     <a href="#" class="navbar-brand">Search</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    @using (Html.BeginForm("GetTickets", "Ticket", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                    @using (Html.BeginForm("GetTicketsIndex", "Ticket", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
                     {
                         <div class="form-group">
                             <input type="text" name="search" value="@ViewBag.search" class="form-control" placeholder="search" />
@@ -34,30 +41,35 @@
             </div>
         </nav>
         <div>
+
             @grid.Table(
-                tableStyle: "table table-responsive table-bordered",
-                columns: grid.Columns(
-                    grid.Column(columnName: "Title", header: "Title"),
-                    grid.Column(columnName: "Description", header: "Description"),
-                    grid.Column(columnName: "CurrentUser", header: "User"),
-                    grid.Column(columnName: "CreatedDate", header: "Date"),
-                    grid.Column(columnName: "Priorities", header: "Priorities")
-                )
-            )
 
-            <div class="row">
-                <div class="col-sm-6">
-                    @grid.PagerList(mode: WebGridPagerModes.All)
-                </div>
-            </div>
+                   tableStyle: "table table-responsive table-bordered",
+                   columns: grid.Columns(
+                  grid.Column(columnName: "Title", header: "Title"),
+                  grid.Column(columnName: "Description", header: "Description"),
+                  grid.Column(columnName: "CurrentUser", header: "User"),
+                  grid.Column(columnName: "CreatedDate", header: "Date"),
+                  grid.Column(columnName: "Priorities", header: "Priorities")
 
-            @Html.Hidden("dir", grid.SortDirection)
-            @Html.Hidden("col", grid.SortColumn)
+              )
+          );;
 
         </div>
+        <div class="row">
+            <div class="col-sm-6">
+                @grid.PagerList(mode: WebGridPagerModes.All)
+            </div>
+        </div>
+
+        @Html.Hidden("dir", grid.SortDirection)
+        @Html.Hidden("col", grid.SortColumn)
+
+    </div>
     </div>
     <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+
     <script>
         $(function () {
             try {
@@ -67,12 +79,15 @@
 
                 var header = $("th a[href*=" + col + "]");
                 if (dir == "Ascending") {
-                    header.text(header.text() + "  ▲")
+
+                    c
+
+                    header.text(header.text() + "  ▲");
+
                 }
                 if (dir == "Descending") {
                     header.text(header.text() + "  ▼");
-                } 
-
+                }
             } catch (e) {
 
             }

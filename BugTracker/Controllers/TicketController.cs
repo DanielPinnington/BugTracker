@@ -14,10 +14,10 @@ namespace BugTracker.Controllers
     {
         
         // GET: Ticket
-        public ActionResult GetTicketsIndex(int page = 1, string sort = "Title", string sortdir = "asc", string search = "")
+        public ActionResult GetTicketsIndex(int page = 1, string sort = "Priorities", string sortdir = "asc", string search = "")
         {
-            int totalRecord =0;
             int pageSize = 10;
+            int totalRecord = 0;
             if (page < 1) page = 1;
             int skip = (page * pageSize) - pageSize;
             var data = GetTickets(search, sort, sortdir, skip, pageSize, out totalRecord);
@@ -36,11 +36,15 @@ namespace BugTracker.Controllers
                              //date should be here will add later
                              a.CurrentUser.Contains(search) ||
                              a.Priorities.Contains(search) //Might comment this ou later
-
+                             
                              select a
                              );
+               
                 totalRecord = v.Count();
                 v = v.OrderBy(sort + " " + sortdir);
+                
+
+
                 if (pageSize > 0)
                 {
                     v = v.Skip(skip).Take(pageSize);
