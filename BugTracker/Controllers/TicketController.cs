@@ -35,7 +35,7 @@ namespace BugTracker.Controllers
                              a.Description.Contains(search) ||
                              //date should be here will add later
                              a.CurrentUser.Contains(search) ||
-                             a.Priorities.Contains(search)
+                             a.Priorities.Contains(search) //Might comment this ou later
 
                              select a
                              );

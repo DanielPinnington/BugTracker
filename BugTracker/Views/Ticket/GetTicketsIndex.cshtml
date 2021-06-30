@@ -40,6 +40,7 @@
                     grid.Column(columnName: "Title", header: "Title"),
                     grid.Column(columnName: "Description", header: "Description"),
                     grid.Column(columnName: "CurrentUser", header: "User"),
+                    grid.Column(columnName: "CreatedDate", header: "Date"),
                     grid.Column(columnName: "Priorities", header: "Priorities")
                 )
             )
@@ -52,11 +53,10 @@
 
             @Html.Hidden("dir", grid.SortDirection)
             @Html.Hidden("col", grid.SortColumn)
-            @Html.Hidden("nam", grid.ColumnNames)
 
         </div>
     </div>
-    <script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script>
         $(function () {
@@ -71,10 +71,7 @@
                 }
                 if (dir == "Descending") {
                     header.text(header.text() + "  ▼");
-                }
-                if (nam == "High") {
-                    header.text(header.text() + " High");
-                }
+                } 
 
             } catch (e) {
 
