@@ -271,7 +271,7 @@ namespace BugTracker.Controllers
                 db.Tickets.Add(user);
                 db.Configuration.ValidateOnSaveEnabled = false;
                 db.SaveChanges();
-
+                return RedirectToAction("Index", "Home");
             }
             return View();
         }

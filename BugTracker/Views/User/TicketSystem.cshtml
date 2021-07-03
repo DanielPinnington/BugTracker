@@ -55,7 +55,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Log In" class="btn btn-default" />
                 </div>
             </div>
         </div>
@@ -63,8 +63,12 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Register Now", "Registration", "User")
 </div>
+<div>
+    @Html.ActionLink("Forgot Password", "ForgottenPassword", "User")
+</div>
+
 @section scripts{
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.25/datatables.min.css" />
 
