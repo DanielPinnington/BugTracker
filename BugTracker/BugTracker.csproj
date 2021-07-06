@@ -445,6 +445,7 @@
     <Content Include="Views\Ticket\GetTicketsIndex.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MyRoleProvider\" />

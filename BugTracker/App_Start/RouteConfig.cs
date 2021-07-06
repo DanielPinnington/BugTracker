@@ -15,7 +15,7 @@ namespace BugTracker
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}", //{id}
+                url: "{controller}/{action}/{id}",//{id}
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
                 //{id}
             );

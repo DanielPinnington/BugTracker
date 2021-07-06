@@ -271,9 +271,10 @@ namespace BugTracker.Controllers
                 db.Tickets.Add(user);
                 db.Configuration.ValidateOnSaveEnabled = false;
                 db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                //return RedirectToAction("TicketsView", "User");
             }
-            return View();
+            return RedirectToAction("TicketsView", "User");
+            //return View();
         }
 
         [HttpPost]
@@ -367,15 +368,12 @@ namespace BugTracker.Controllers
 
             return View(db.Tickets.ToList());
         }
-
-        [HttpPost]
-        public ActionResult DescriptionButton(string button)
+        [HttpGet]
+        public ActionResult Edit(int Id)
         {
-            if(button == "test")
-            {
-                bool hasBeenClicked = true;
-            }
-            return View("TicketsView");
+            BugTracking d = new BugTracking();
+            Ticket t = d.Tickets.Single(emp => emp.Id == Id);
+            return View(t);
         }
     }
 }

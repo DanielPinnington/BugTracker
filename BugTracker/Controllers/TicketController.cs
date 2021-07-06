@@ -7,6 +7,8 @@ using System.Linq.Dynamic;
 using System.Web.Mvc;
 using System.Web.UI;
 using System.Xml.Schema;
+using Newtonsoft.Json.Linq;
+using System.Security.Cryptography;
 
 namespace BugTracker.Controllers
 {
@@ -39,8 +41,18 @@ namespace BugTracker.Controllers
                              
                              select a
                              );
-               
-                totalRecord = v.Count();
+                using (BugTracking dp = new BugTracking())
+                {
+                    var vv = (from b in dc.Tickets
+                              select new Ticket
+                              {
+                                  Title = b.Title,
+                                  Description = b.Description,
+                                  Priorities = b.Priorities
+                              });
+                }
+
+                    totalRecord = v.Count();
                 v = v.OrderBy(sort + " " + sortdir);
                 
 
@@ -52,5 +64,32 @@ namespace BugTracker.Controllers
                 return v.ToList();
             }
         }
+
+        public ActionResult saveuser(int id, string propertyName, string value)
+        {
+            var status = false;
+            var message = "";
+
+            //Update data to database 
+            using (BugTracking dc = new BugTracking())
+            {
+                var user = dc.Tickets.Find(id);
+                if (user != null)
+                {
+                    dc.Entry(user).Property(propertyName).CurrentValue = value;
+                    dc.SaveChanges();
+                    status = true;
+                }
+                else
+                {
+                    message = "Error!";
+                }
+            }
+
+            var response = new { value = value, status = status, message = message };
+            JObject o = JObject.FromObject(response);
+            return Content(o.ToString());
+        }
+
     }
 }
