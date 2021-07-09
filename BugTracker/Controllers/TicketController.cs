@@ -91,13 +91,5 @@ namespace BugTracker.Controllers
             return Content(o.ToString());
         }
 
-        [HttpGet]
-        public ActionResult Edit(int Id)
-        {
-            BugTracking d = new BugTracking();
-            Ticket t = d.Tickets.Single(emp => emp.Id == Id);
-            return View(t);
-        }
-
     }
 }

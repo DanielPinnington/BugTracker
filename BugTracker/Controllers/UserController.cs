@@ -2,6 +2,7 @@
 //using Google.Apis.Admin.Directory.directory_v1.Data;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -368,12 +369,46 @@ namespace BugTracker.Controllers
 
             return View(db.Tickets.ToList());
         }
+
+
+        public ActionResult Delete(int id)
+        {
+            using (BugTracking d = new BugTracking())
+            {
+                return View(d.Tickets.Where(x => x.Id == id).FirstOrDefault());
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection form)
+        {
+                using (BugTracking d = new BugTracking())
+                {
+                    Ticket tickets = d.Tickets.Where(x => x.Id == id).FirstOrDefault();
+                    d.Tickets.Remove(tickets);
+                    d.SaveChanges();
+                }
+            return RedirectToAction("TicketsView", "User");
+        }
+
         [HttpGet]
         public ActionResult Edit(int Id)
         {
             BugTracking d = new BugTracking();
             Ticket t = d.Tickets.Single(emp => emp.Id == Id);
             return View(t);
+        }
+
+        [HttpPost]
+
+        public ActionResult Edit(int Id, Ticket ticket)
+        {
+            using (BugTracking d = new BugTracking())
+            {
+                d.Entry(ticket).State = EntityState.Modified; 
+                d.SaveChanges();
+            }
+            return RedirectToAction("TicketsView", "User");
         }
     }
 }
