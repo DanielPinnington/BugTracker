@@ -33,15 +33,19 @@
             </div>
         </nav>
         <div>
-            @grid.Table(
-                tableStyle: "table table-responsive table-bordered",
-                columns: grid.Columns(
-                    grid.Column(columnName: "Title", header: "Title"),
-                    grid.Column(columnName: "Description", header: "Description"),
-                    grid.Column(columnName: "CurrentUser", header: "User"),
-                    grid.Column(columnName: "Priority", header: "Priority")
-                )
-            )
+            @foreach (var item in Model) { 
+                grid.Table(
+                    tableStyle: "table table-responsive table-bordered",
+                    columns: grid.Columns(
+                        grid.Column(columnName: "Title", header: "Title", modelItem => item.Title),
+                        grid.Column(columnName: "Description", header: "Description", modelItem => item.Description),
+                        grid.Column(columnName: "CurrentUser", header: "User", modelItem => item.CurrentUser),
+                        grid.Column(columnName: "Priority", header: "Priority", modelItem => item.Priorities)
+
+                    )
+                );
+            }
+
 
             <div class="row">
                 <div class="col-sm-6">
