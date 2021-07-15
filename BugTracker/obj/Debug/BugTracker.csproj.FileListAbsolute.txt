@@ -142,8 +142,8 @@ D:\BugTracker\BugTracker\BugTracker\bin\System.Web.WebPages.Deployment.xml
 D:\BugTracker\BugTracker\BugTracker\bin\System.Web.WebPages.Razor.xml
 D:\BugTracker\BugTracker\BugTracker\bin\Antlr3.Runtime.pdb
 D:\BugTracker\BugTracker\BugTracker\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.csproj.AssemblyReference.cache
 D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.csproj.CoreCompileInputs.cache
 D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.csproj.CopyComplete
 D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.dll
 D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.pdb
+D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.csproj.AssemblyReference.cache

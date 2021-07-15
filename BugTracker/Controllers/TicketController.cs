@@ -31,11 +31,11 @@ namespace BugTracker.Controllers
             {
                 using(BugTracking dc = new BugTracking())
                 {
-                    var v = (from a in dc.Tickets
-                             where
+                var v = (from a in dc.Tickets
+                         where
                              a.Title.Contains(search) ||
                              a.Description.Contains(search) ||
-                             //date should be here will add later
+                             
                              a.CurrentUser.Contains(search) ||
                              a.Priorities.Contains(search) //Might comment this ou later
                              

@@ -52,7 +52,7 @@
                              grid.Column(columnName: "Title", header: "Title"),
                              grid.Column(columnName: "Description", header: "Description"),
                              grid.Column(columnName: "CurrentUser", header: "User"),
-                             grid.Column(columnName: "CreatedDate", header: "Date"),
+                             grid.Column(columnName: "CreatedDate", header: "Date", format: (item) => item.CreatedDate.ToShortDateString()),
                              grid.Column(columnName: "Priorities", header: "Priorities")
                              //format: @<text><div class="edit" data-id="@item.ID" data-propertyname="Title">@item.Title</div></text>
                              // format:@<text><div class="editSelect" data-id="@item.ID" data-propertyname="Priorities">@item.Priorities</div></text>)
