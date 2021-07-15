@@ -1,14 +1,14 @@
-﻿
+﻿@using BugTracker.Models
 @model IEnumerable<BugTracker.Models.Ticket>
 
 @{
     ViewBag.Title = "TicketsView";
 }
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 <h2>TicketsView</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "TicketSystem", "User")
 </p>
 <table class="table" style="background-color: burlywood; >
     <tr">
@@ -28,43 +28,44 @@
             @Html.DisplayNameFor(model => model.CurrentUser)
         </th>
         <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-
-                @Html.DisplayFor(modelItem => item.Description, new { @class = "hidden" })
-
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Priorities)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentUser)
-            </td>
-            <td>
-
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id})
-
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
         </tr>
-    }
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Description, new { @class = "hidden" })
+
+                </td>
+                <td>
+                    @item.CreatedDate.ToShortDateString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Priorities)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentUser)
+                </td>
+                <td>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
 </table>
 <style>
     .hidden {
         display: none;
     }
+
     .someClass {
         color: Green !important;
     }

@@ -35,7 +35,8 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { Value = DateTime.Now.ToShortDateString() } })
+
+                    @Html.EditorFor(model => model.CreatedDate, new { htmlAttributes = new { Value = DateTime.Now.ToString("dd-MMM-yyyy") } })
                     @Html.ValidationMessageFor(model => model.CreatedDate, "", new { @class = "text-danger" })
                 </div>
             </div>

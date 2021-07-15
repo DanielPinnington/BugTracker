@@ -22,7 +22,9 @@ namespace BugTracker.Models
 
         [Display(Name = "Current Date")]
         [Required]
-        public DateTime? CreatedDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:d")]
+        [DataType(DataType.Date)]
+        public DateTime CreatedDate { get; set; }
 
         [Display(Name = "Priority")]
         [Required(AllowEmptyStrings = false, ErrorMessage = "Low, Medium or High")]
