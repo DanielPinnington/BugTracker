@@ -4,70 +4,77 @@
 @{
     ViewBag.Title = "TicketsView";
 }
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-<h2>TicketsView</h2>
 
-<p>
-    @Html.ActionLink("Create New", "TicketSystem", "User")
-</p>
-<table class="table" style="background-color: burlywood; >
-    <tr">
-        <th style="color: red;">
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Priorities)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CurrentUser)
-        </th>
-        <th></th>
-        </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
+    @if (User.Identity.IsAuthenticated)
+    {
 
-                    @Html.DisplayFor(modelItem => item.Description, new { @class = "hidden" })
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <h2>TicketsView</h2>
 
-                </td>
-                <td>
-                    @item.CreatedDate.ToShortDateString()
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Priorities)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CurrentUser)
-                </td>
-                <td>
+        <p>
+            @Html.ActionLink("Create New", "TicketSystem", "User")
+        </p>
+        <table class="table" style="background-color:dimgrey"></table>
 
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
+        <tr>
+            <th style="color: red;">
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Priorities)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentUser)
+            </th>
+            <th></th>
             </tr>
+
+        foreach (var item in Model)
+        {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Description, new { @class = "hidden" })
+
+                    </td>
+                    <td>
+                        @item.CreatedDate.ToShortDateString()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Priorities)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrentUser)
+                    </td>
+                    <td>
+
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
         }
 
-</table>
-<style>
-    .hidden {
-        display: none;
     }
 
-    .someClass {
-        color: Green !important;
-    }
-</style>
+            <style>
+                .hidden {
+                    display: none;
+                }
+
+                .someClass {
+                    color: Green !important;
+                }
+            </style>
 
