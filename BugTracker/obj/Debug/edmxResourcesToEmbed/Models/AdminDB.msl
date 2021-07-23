@@ -5,7 +5,7 @@
       <EntityTypeMapping TypeName="BugTrackerDBModel1.Admin">
         <MappingFragment StoreEntitySet="Admin">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UsernameID" ColumnName="UsernameID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
           <ScalarProperty Name="EmailID" ColumnName="EmailID" />

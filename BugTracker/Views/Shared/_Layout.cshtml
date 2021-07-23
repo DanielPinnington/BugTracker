@@ -20,12 +20,16 @@
                 </button>
                 @Html.ActionLink("BugTracker", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Register", "Registration", "User")</li>
-                <li>@Html.ActionLink("Login", "Login", "User")</li>
-            </ul>
-            </div>
+            @if (!HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Register", "Registration", "User")</li>
+                        <li>@Html.ActionLink("Login", "Login", "User")</li>
+                    </ul>
+                </div>
+            }
+
             @if (@HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 BugTracker.Models.BugTrackerDBEntities2 dc = new BugTracker.Models.BugTrackerDBEntities2();
