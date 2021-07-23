@@ -23,7 +23,7 @@
             @if (@HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 BugTracker.Models.BugTrackerDBEntities2 dc = new BugTracker.Models.BugTrackerDBEntities2();
-                var account = dc.Admins.Where(a => a.EmailID == HttpContext.Current.User.Identity.Name).FirstOrDefault();
+                var account = dc.Admins.Where(a => a.UsernameID == HttpContext.Current.User.Identity.Name).FirstOrDefault();
 
                 if (account != null)
                 {
@@ -39,17 +39,32 @@
                     </div>
                 }
             }
+            @if (@HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                BugTracker.Models.BugTrackerDBEntities dc = new BugTracker.Models.BugTrackerDBEntities();
+                var account = dc.Users.Where(a => a.UsernameID == HttpContext.Current.User.Identity.Name).FirstOrDefault();
+
+                if (account != null)
+                {
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Create Ticket", "TicketSystem", "User")</li>
+                            <li>@Html.ActionLink("Ticket", "GetTicketsIndex", "Ticket")</li>
+                        </ul>
+                    </div>
+                }
+            }
             @if (User.Identity.IsAuthenticated) // Checks if logged in or not within layout
             {
-        <div class="topright">
-            Logged in : @HttpContext.Current.User.Identity.Name
+                <div class="topright">
+                    Logged in : @HttpContext.Current.User.Identity.Name
 
-            @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
-            {
-            <a href="javascript:document.getElementById('logoutForm').submit()" style="color: lightblue">Logout</a>
+                    @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        <a href="javascript:document.getElementById('logoutForm').submit()" style="color: lightblue">Logout</a>
 
-            }
-        </div>
+                    }
+                </div>
             }
 
 
