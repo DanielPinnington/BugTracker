@@ -118,7 +118,7 @@ namespace BugTracker.Controllers
             string message = "";
             using(BugTrackerDBEntities dc = new BugTrackerDBEntities())
             {
-                var v = dc.Users.Where(a => a.UsernameID == login.emailID).FirstOrDefault();
+                var v = dc.Users.Where(a => a.Username == login.emailID).FirstOrDefault();
                 //var v = dc.Users.Where(a => a.EmailID == login.emailID).FirstOrDefault(); EMAIL LOGIN
                 if(v != null)
                 {

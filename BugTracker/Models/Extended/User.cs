@@ -40,6 +40,7 @@ namespace BugTracker.Models
 
         [DataType(DataType.Password)]
         [Compare("Password", ErrorMessage = "Password is not the same")]
+        [Display(Name = "Confirm Password")]
         public String ConfirmPassword { get; set; }
 
     }
