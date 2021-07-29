@@ -64,15 +64,15 @@
             }
             @if (User.Identity.IsAuthenticated) // Checks if logged in or not within layout
             {
-                <div class="topright">
-                    Logged in : @HttpContext.Current.User.Identity.Name
+        <div class="topright">
+            <img src="~/Images/loggedin.png" style="width:20px" /> @HttpContext.Current.User.Identity.Name 
 
-                    @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
-                    {
-                        <a href="javascript:document.getElementById('logoutForm').submit()" style="color: lightblue">Logout</a>
+            @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+            {
+        <a href="javascript:document.getElementById('logoutForm').submit()" style="color: white"><img src="~/Images/signout.png" style="width:20px" /> Logout</a>
 
-                    }
-                </div>
+            }
+        </div>
             }
 
 
@@ -89,7 +89,7 @@
 
         .topright {
             position: absolute;
-            top: 8px;
+            top: 2px;
             right:200px;
             font-size: 18px;
             color: white;

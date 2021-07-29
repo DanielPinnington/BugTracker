@@ -449,6 +449,7 @@
     <Content Include="Views\User\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Images\" />
     <Folder Include="MyRoleProvider\" />
   </ItemGroup>
   <ItemGroup>
