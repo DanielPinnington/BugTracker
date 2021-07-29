@@ -9,128 +9,131 @@
 }
 
 
-<!DOCTYPE html>
+@if (User.Identity.IsAuthenticated)
+{
+    <!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>Index</title>
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-    <script src="https://www.appelsiini.net/download/jquery.jeditable.js"></script>
-    <script src="~/Scripts/gridmvc.min.js"></script>
+        <script src="https://www.appelsiini.net/download/jquery.jeditable.js"></script>
+        <script src="~/Scripts/gridmvc.min.js"></script>
 
-    <link href="~/Content/Gridmvc.css" rel="stylesheet" />
+        <link href="~/Content/Gridmvc.css" rel="stylesheet" />
 
-</head>
-<body>
-    <div class="container">
-        <h2>Employees List</h2>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a href="#" class="navbar-brand">Search</a>
+    </head>
+    <body>
+        <div class="container">
+            <h2>Employees List</h2>
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a href="#" class="navbar-brand">Search</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        @using (Html.BeginForm("GetTicketsIndex", "Ticket", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                        {
+                            <div class="form-group">
+                                <input type="text" name="search" value="@ViewBag.search" class="form-control" placeholder="search" />
+                            </div>
+                            <button type="submit" value="Search" class="btn btn-success">Search</button>
+                        }
+                    </div>
                 </div>
-                <div class="collapse navbar-collapse">
-                    @using (Html.BeginForm("GetTicketsIndex", "Ticket", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
-                    {
-                        <div class="form-group">
-                            <input type="text" name="search" value="@ViewBag.search" class="form-control" placeholder="search" />
-                        </div>
-                        <button type="submit" value="Search" class="btn btn-success">Search</button>
-                    }
-                </div>
-            </div>
-        </nav>
-        <div>
 
-            @grid.GetHtml(
+            </nav>
+            <div>
 
-                        tableStyle: "table table-responsive table-bordered",
-                        columns: grid.Columns(
-                         grid.Column(columnName: "Title", header: "Title"),
-                         grid.Column(columnName: "Description", header: "Description"),
-                         grid.Column(columnName: "CurrentUser", header: "User"),
-                         grid.Column(columnName: "CreatedDate", header: "Date", format: (item) => item.CreatedDate.ToShortDateString()),
-                         grid.Column(columnName: "Priorities", header: "Priorities")
-                         //format: @<text><div class="edit" data-id="@item.ID" data-propertyname="Title">@item.Title</div></text>
-                         // format:@<text><div class="editSelect" data-id="@item.ID" data-propertyname="Priorities">@item.Priorities</div></text>)
-                         //format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Description">@item.Description</div></text>
+                @grid.GetHtml(
+
+                            tableStyle: "table table-responsive table-bordered",
+                            columns: grid.Columns(
+                             grid.Column(columnName: "Title", header: "Title"),
+                             grid.Column(columnName: "Description", header: "Description"),
+                             grid.Column(columnName: "CurrentUser", header: "User"),
+                             grid.Column(columnName: "CreatedDate", header: "Date", format: (item) => item.CreatedDate.ToShortDateString()),
+                             grid.Column(columnName: "Priorities", header: "Priorities")
+                             //format: @<text><div class="edit" data-id="@item.ID" data-propertyname="Title">@item.Title</div></text>
+                             // format:@<text><div class="editSelect" data-id="@item.ID" data-propertyname="Priorities">@item.Priorities</div></text>)
+                             //format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Description">@item.Description</div></text>
+                             )
                          )
-                     )
-            @Html.ActionLink("Edit Tickets Page", "TicketsView", "User")
+                @Html.ActionLink("Edit Tickets Page", "TicketsView", "User")
 
 
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
-                @grid.PagerList(mode: WebGridPagerModes.All)
             </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    @grid.PagerList(mode: WebGridPagerModes.All)
+                </div>
+            </div>
+
+            @Html.Hidden("dir", grid.SortDirection)
+            @Html.Hidden("col", grid.SortColumn)
+
         </div>
-
-        @Html.Hidden("dir", grid.SortDirection)
-        @Html.Hidden("col", grid.SortColumn)
-
-    </div>
-    </div>
-    <script src="~/Scripts/jquery-3.4.1.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/jquery-3.4.1.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
 
 
-    <script>
-        $(document).ready(function () {
-            var oldValue = '';
-            $('.edit').editable('/GetTicketsIndex/saveuser', {
-                cssclass: 'jeditForm',
-                tooltip: 'click to edit me...',
-                width: 'none',
-                height: 'none',
-                onsubmit: function (settings, original) {
-                    oldValue = original.revert;
-                },
-                submitdata: function () {
-                    return {
-                        id: $(this).data('id'),
-                        PropertyName: $(this).data('propertyname')
+        <script>
+            $(document).ready(function () {
+                var oldValue = '';
+                $('.edit').editable('/GetTicketsIndex/saveuser', {
+                    cssclass: 'jeditForm',
+                    tooltip: 'click to edit me...',
+                    width: 'none',
+                    height: 'none',
+                    onsubmit: function (settings, original) {
+                        oldValue = original.revert;
+                    },
+                    submitdata: function () {
+                        return {
+                            id: $(this).data('id'),
+                            PropertyName: $(this).data('propertyname')
+                        }
+                    },
+                    callback: function (value, settings) {
+                        var jsonData = $.parseJSON(value);
+                        if (jsonData.status) {
+                            $(this).text(jsonData.value);
+                        }
+                        else {
+                            $(this).text(oldValue);
+                        }
                     }
-                },
-                callback: function (value, settings) {
-                    var jsonData = $.parseJSON(value);
-                    if (jsonData.status) {
-                        $(this).text(jsonData.value);
+                })
+            })
+        </script>
+
+        <script>
+            $(function () {
+                try {
+                    var dir = $('#dir').val();
+                    var col = $('#col').val();
+                    var nam = $('#nam').val();
+
+                    var header = $("th a[href*=" + col + "]");
+                    if (dir == "Ascending") {
+
+                        c
+
+                        header.text(header.text() + "  ▲");
+
                     }
-                    else {
-                        $(this).text(oldValue);
+                    if (dir == "Descending") {
+                        header.text(header.text() + "  ▼");
                     }
+                } catch (e) {
+
                 }
             })
-        })
-    </script>
-
-    <script>
-        $(function () {
-            try {
-                var dir = $('#dir').val();
-                var col = $('#col').val();
-                var nam = $('#nam').val();
-
-                var header = $("th a[href*=" + col + "]");
-                if (dir == "Ascending") {
-
-                    c
-
-                    header.text(header.text() + "  ▲");
-
-                }
-                if (dir == "Descending") {
-                    header.text(header.text() + "  ▼");
-                }
-            } catch (e) {
-
-            }
-        })
-    </script>
-</body>
+        </script>
+       
 </html>
+}
