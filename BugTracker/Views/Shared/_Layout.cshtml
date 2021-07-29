@@ -5,9 +5,18 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <div class="bottomCenter">
+        <title>
+            @ViewBag.Title - My ASP.NET Application
+        </title>
+
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+
+        </footer>
+        </div>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -82,8 +91,13 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p></p>
+
         </footer>
+        <form action="https://www.github.com/danielpinnington" method="get" target="_blank">
+            <center><button class="bottomCenterLink">Designed & Built by Daniel Pinnington</button></center>
+        </form>
+
     </div>
     <style>
 
@@ -93,6 +107,48 @@
             right:200px;
             font-size: 18px;
             color: white;
+        }
+
+        .bottomCenterLink {
+            padding-top: 40px;
+            padding-bottom: 10px;
+            position: absolute;
+            vertical-align: middle;
+            background-color: transparent;
+            left: 50%;
+            bottom: 20px;
+            transform: translate(-50%, -50%);
+            margin: 0 auto;
+            outline: none;
+            font-size: 13px;
+            color: Grey;
+            border: none;
+            transition: opacity 0.1s ease-out;
+        }
+
+                .bottomCenterLink:hover {
+                    font-size: 13px;
+                    color: Black;
+                    border: none;
+                    position: absolute;
+                    transition: 0.3s ease-out;
+                }
+
+        .bottomCenter {
+            padding-top: 40px;
+            padding-bottom: 10px;
+            position: absolute;
+            vertical-align: middle;
+            background-color: transparent;
+            left: 50%;
+            bottom: -20px;
+            transform: translate(-50%, -50%);
+            margin: 0 auto;
+            outline: none;
+            font-size: 13px;
+            color: Grey;
+            border: none;
+            transition: opacity 0.1s ease-out;
         }
 
     </style>
