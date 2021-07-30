@@ -66,7 +66,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li>@Html.ActionLink("Create Ticket", "TicketSystem", "User")</li>
-                            <li>@Html.ActionLink("Ticket", "GetTicketsIndex", "Ticket")</li>
+                            <li>@Html.ActionLink("Tickets", "GetTicketsIndex", "Ticket")</li>
                         </ul>
                     </div>
                 }
@@ -74,13 +74,17 @@
             @if (User.Identity.IsAuthenticated) // Checks if logged in or not within layout
             {
         <div class="topright">
-            <img src="~/Images/loggedin.png" style="width:20px" /> @HttpContext.Current.User.Identity.Name 
 
-            @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
-            {
-        <a href="javascript:document.getElementById('logoutForm').submit()" style="color: white"><img src="~/Images/signout.png" style="width:20px" /> Logout</a>
 
-            }
+            <div class="dropdown">
+                <button class="dropbtn" style="color: #9d9d9d;"><img src="~/Images/loggedin.png" style="width:20px" />@HttpContext.Current.User.Identity.Name</button>
+                <div class="dropdown-content">
+                        @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            <a href="javascript:document.getElementById('logoutForm').submit()" style="color: black"><img src="~/Images/signout.png" style="width:20px" /> Logout</a>
+                        }
+                </div>
+            </div>
         </div>
             }
 
@@ -101,13 +105,71 @@
     </div>
     <style>
 
+        /* Dropdown Button */
+        .dropbtn {
+            background-color: transparent;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            background-color: transparent;
+        }
+
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: #9d9d9d;
+               
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                /* Change color of dropdown links on hover */
+                .dropdown-content a:hover {
+                    color: black;
+                }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+            display: block;
+            background-color: transparent;
+        }
+
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {
+            background-color: transparent;
+        }
+
         .topright {
             position: absolute;
             top: 2px;
-            right:200px;
+            right: 200px;
             font-size: 18px;
-            color: white;
+            color: #9d9d9d;
         }
+            .topright:hover {
+                position: absolute;
+                top: 2px;
+                right: 200px;
+                font-size: 18px;
+                color: #9d9d9d;
+            }
 
         .bottomCenterLink {
             padding-top: 40px;
