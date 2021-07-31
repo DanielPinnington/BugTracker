@@ -1,6 +1,4 @@
-﻿
-
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -40,36 +38,24 @@
                 </div>
             }
 
+           
             @if (@HttpContext.Current.User.Identity.IsAuthenticated)
             {
                 BugTracker.Models.BugTrackerDBEntities2 dc = new BugTracker.Models.BugTrackerDBEntities2();
                 var account = dc.Admins.Where(a => a.Username == HttpContext.Current.User.Identity.Name).FirstOrDefault();
 
-                if (account != null)
-                {
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li>@Html.ActionLink("User", "AdminRegistration", "Admin")</li>
-                            <li>@Html.ActionLink("User", "TicketSystem", "User")</li>
-
-                        </ul>
-                    </div>
-                }
-            }
-            @if (@HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-                BugTracker.Models.BugTrackerDBEntities dc = new BugTracker.Models.BugTrackerDBEntities();
-                var account = dc.Users.Where(a => a.Username == HttpContext.Current.User.Identity.Name).FirstOrDefault();
-
-                if (account != null)
-                {
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li>@Html.ActionLink("Create Ticket", "TicketSystem", "User")</li>
                             <li>@Html.ActionLink("Tickets", "GetTicketsIndex", "Ticket")</li>
+
+                            @if (account != null)
+                            {
+                                <li>@Html.ActionLink("Create Ticket", "TicketSystem", "User")</li>
+                                <li>@Html.ActionLink("Tickets", "GetTicketsIndex", "Ticket")</li>
+                            }
                         </ul>
                     </div>
-                }
             }
             @if (User.Identity.IsAuthenticated) // Checks if logged in or not within layout
             {
@@ -172,14 +158,15 @@
             }
 
         .bottomCenterLink {
-            padding-top: 40px;
-            padding-bottom: 10px;
-            position: absolute;
-            vertical-align: middle;
+            padding-top: 10px;
+            position: static;
             background-color: transparent;
+            position: sticky;
             left: 50%;
             bottom: 20px;
             transform: translate(-50%, -50%);
+            margin: 0 auto;
+            right: 25%;
             margin: 0 auto;
             outline: none;
             font-size: 13px;
@@ -192,7 +179,8 @@
                     font-size: 13px;
                     color: Black;
                     border: none;
-                    position: absolute;
+                    position: sticky;
+
                     transition: 0.3s ease-out;
                 }
 

@@ -31,7 +31,7 @@ namespace BugTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Registration([Bind(Exclude ="IsEmailVerified, ActivationCode")] User user)
+        public ActionResult Registration([Bind(Exclude = "IsEmailVerified, ActivationCode")] User user)
         {
             bool Status = false;
             string message = "";
@@ -91,7 +91,7 @@ namespace BugTracker.Controllers
             {
                 dc.Configuration.ValidateOnSaveEnabled = false; //This is to avoid confirm password (does not match) issue
                 var v = dc.Users.Where(a => a.ActivationCode == new Guid(id)).FirstOrDefault();
-                if(v != null)
+                if (v != null)
                 {
                     v.IsEmailVerified = true;
                     dc.SaveChanges();
@@ -113,22 +113,22 @@ namespace BugTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(UserLogin login, string ReturnURL="")
+        public ActionResult Login(UserLogin login, string ReturnURL = "")
         {
             string message = "";
-            using(BugTrackerDBEntities dc = new BugTrackerDBEntities())
+            using (BugTrackerDBEntities dc = new BugTrackerDBEntities())
             {
                 var v = dc.Users.Where(a => a.Username == login.emailID).FirstOrDefault();
                 //var v = dc.Users.Where(a => a.EmailID == login.emailID).FirstOrDefault(); EMAIL LOGIN
-                if(v != null)
+                if (v != null)
                 {
-                    if(string.Compare(Crypto.Hash(login.Password), v.Password) == 0)
+                    if (string.Compare(Crypto.Hash(login.Password), v.Password) == 0)
                     {
                         int timeout = login.RememberMe ? 525600 : 20; //If remember me, remember this for one year! (525600)
-                         var ticket = new FormsAuthenticationTicket(login.emailID, login.RememberMe, timeout);
+                        var ticket = new FormsAuthenticationTicket(login.emailID, login.RememberMe, timeout);
                         //var ticket = new FormsAuthenticationTicket(login.emailID, login.RememberMe, timeout); //EMAIL!
                         string encrypted = FormsAuthentication.Encrypt(ticket);
-                        var cookie = new HttpCookie(FormsAuthentication.FormsCookieName,encrypted);
+                        var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypted);
                         cookie.Expires = DateTime.Now.AddMinutes(timeout); //ONE YEAR (TIMEOUT)
                         cookie.HttpOnly = true;
 
@@ -171,7 +171,7 @@ namespace BugTracker.Controllers
         [NonAction]
         public bool DoesEmailExist(string emailID)
         {
-            using(BugTrackerDBEntities dc = new BugTrackerDBEntities())
+            using (BugTrackerDBEntities dc = new BugTrackerDBEntities())
             {
                 var v = dc.Users.Where(a => a.EmailID == emailID).FirstOrDefault();
                 return v != null;
@@ -185,7 +185,7 @@ namespace BugTracker.Controllers
             var host = Request.Url.Host;
             var port = Request.Url.Port;
 
-            var verifyURL = "/User/"+ emailFor +"/" + activationCode;
+            var verifyURL = "/User/" + emailFor + "/" + activationCode;
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyURL);
 
             var fromEmail = new MailAddress("BugTrackerTest12@gmail.com");
@@ -207,7 +207,7 @@ namespace BugTracker.Controllers
             {
                 subject = "Reset Password";
                 body = "Hi, <br/>br/>We got a request to reset your account, please click on the below link to reset your password." +
-                    "<br/><br/><a href='" + link+">Reset Password Link</a> ";
+                    "<br/><br/><a href='" + link + ">Reset Password Link</a> ";
             }
             var smtp = new SmtpClient
             {
@@ -226,22 +226,22 @@ namespace BugTracker.Controllers
                 IsBodyHtml = true
             })
                 smtp.Send(message);
-            }
+        }
 
-            public ActionResult ForgottenPassword()
-            {
-                return View();
-            }
+        public ActionResult ForgottenPassword()
+        {
+            return View();
+        }
 
         public ActionResult BugTracking() //This will need changing soon (This is testing the drop down list priority) will need to try link it up with another DB
         {
 
-           // TicketPriority tickets = new TicketPriority();
-           // using(BugTrackerDBEntities3 db = new BugTrackerDBEntities3())
-           // {
-           //     tickets.TicketImportance = db.TicketPriorities.ToList<TicketPriority>();
-           // }
-         return View(); //(Tickets)
+            // TicketPriority tickets = new TicketPriority();
+            // using(BugTrackerDBEntities3 db = new BugTrackerDBEntities3())
+            // {
+            //     tickets.TicketImportance = db.TicketPriorities.ToList<TicketPriority>();
+            // }
+            return View(); //(Tickets)
         }
 
 
@@ -266,9 +266,9 @@ namespace BugTracker.Controllers
             ViewBag.CurrentUser = HttpContext.User.Identity.Name;
 
             Ticket tickets = new Ticket();
-            using(BugTracking db = new Models.BugTracking())
+            using (BugTracking db = new Models.BugTracking())
             {
-                
+
                 db.Tickets.Add(user);
                 db.Configuration.ValidateOnSaveEnabled = false;
                 db.SaveChanges();
@@ -279,16 +279,16 @@ namespace BugTracker.Controllers
         }
 
         [HttpPost]
-            public ActionResult ForgottenPassword(string EmailID)
-            {
+        public ActionResult ForgottenPassword(string EmailID)
+        {
             //Verify Email Address
             string message = "";
             bool status = false;
 
-            using(BugTrackerDBEntities dc = new BugTrackerDBEntities())
+            using (BugTrackerDBEntities dc = new BugTrackerDBEntities())
             {
                 var account = dc.Users.Where(a => a.EmailID == EmailID).FirstOrDefault();
-                if(account != null)
+                if (account != null)
                 {
                     //Send email to reset the password
                     string resetCode = Guid.NewGuid().ToString();
@@ -296,7 +296,7 @@ namespace BugTracker.Controllers
                     account.ResetPasswordCode = resetCode;
 
                     //This line I have added here to avoid confirm password not match issue, as we had added a confirm password property.
-                    
+
                     dc.Configuration.ValidateOnSaveEnabled = false;
                     dc.SaveChanges();
                     message = "Reset Password request has been sent to your email.";
@@ -309,17 +309,17 @@ namespace BugTracker.Controllers
 
             ViewBag.Message = message;
             return View();
-            }
-        
-            public ActionResult ResetPassword(string id)
-            {
+        }
+
+        public ActionResult ResetPassword(string id)
+        {
             //Verify the password link
             //Find the account associated with the link.
             //Provide reset password page view.
-            using(BugTrackerDBEntities dc = new BugTrackerDBEntities())
+            using (BugTrackerDBEntities dc = new BugTrackerDBEntities())
             {
                 var user = dc.Users.Where(a => a.ResetPasswordCode == id).FirstOrDefault();
-                if(user != null)
+                if (user != null)
                 {
                     ResetPasswordModel model = new ResetPasswordModel();
                     model.ResetCode = id;
@@ -331,7 +331,7 @@ namespace BugTracker.Controllers
                 }
             }
             return View();
-            }
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -343,7 +343,7 @@ namespace BugTracker.Controllers
                 using (BugTrackerDBEntities dc = new BugTrackerDBEntities())
                 {
                     var user = dc.Users.Where(a => a.ResetPasswordCode == model.ResetCode).FirstOrDefault();
-                    if(user != null)
+                    if (user != null)
                     {
                         user.Password = Crypto.Hash(model.NewPassword); //Hash so no1 can find password in database
                         user.ResetPasswordCode = "";
@@ -370,6 +370,12 @@ namespace BugTracker.Controllers
             return View(db.Tickets.ToList());
         }
 
+        public ActionResult mainPage(Ticket user)
+        {
+            BugTracking db = new BugTracking();
+
+            return View(db.Tickets.ToList());
+        }
 
         public ActionResult Delete(int id)
         {
@@ -382,12 +388,12 @@ namespace BugTracker.Controllers
         [HttpPost]
         public ActionResult Delete(int id, FormCollection form)
         {
-                using (BugTracking d = new BugTracking())
-                {
-                    Ticket tickets = d.Tickets.Where(x => x.Id == id).FirstOrDefault();
-                    d.Tickets.Remove(tickets);
-                    d.SaveChanges();
-                }
+            using (BugTracking d = new BugTracking())
+            {
+                Ticket tickets = d.Tickets.Where(x => x.Id == id).FirstOrDefault();
+                d.Tickets.Remove(tickets);
+                d.SaveChanges();
+            }
             return RedirectToAction("TicketsView", "User");
         }
 
@@ -405,10 +411,17 @@ namespace BugTracker.Controllers
         {
             using (BugTracking d = new BugTracking())
             {
-                d.Entry(ticket).State = EntityState.Modified; 
+                d.Entry(ticket).State = EntityState.Modified;
                 d.SaveChanges();
             }
             return RedirectToAction("TicketsView", "User");
+        }
+
+        public ActionResult Details(int Id)
+        {
+            BugTracking d = new BugTracking();
+            Ticket t = d.Tickets.Single(emp => emp.Id == Id);
+            return View(t);
         }
     }
 }
