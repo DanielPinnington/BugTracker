@@ -77,7 +77,7 @@
 
 
             <div class="dropdown">
-                <button class="dropbtn" style="color: #9d9d9d;"><img src="~/Images/loggedin.png" style="width:20px" />@HttpContext.Current.User.Identity.Name</button>
+                <img src="~/Images/loggedin.png" style="width:20px" /><button class="dropbtn" style="color: #9d9d9d;">@HttpContext.Current.User.Identity.Name</button>
                 <div class="dropdown-content">
                         @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
                         {
