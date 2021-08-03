@@ -15,30 +15,38 @@
     <p>
         @Html.ActionLink("Create New", "Create")
     </p>
-    <table class="table">
+
+
+
+
+
+    @{ var count = Model.Count();
+
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Priorities)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CurrentUser)
-            </th>
-            <th></th>
+                <td>
+
+                    <div style="display: flex; justify-content: space-around">
+                            <div>@Html.DisplayName("Tickets Available")<br></br>@count.ToString()</div>
+                            <div>@Html.DisplayName("Tickets Available")<br></br>@count.ToString()</div>
+                        </div>
+                </td>
         </tr>
-        @{ var count = Model.Count();
-            foreach (var item in Model.ToList())
-            {
-                <tr>
-                    <td>
+    }
 
-                        @Html.DisplayFor(modelItem => item.Priorities);
-                    </td>
-                </tr>
-                }
-            <h1>@count</h1>
+    <style>
+        .div1 {
+            left:auto;
+            width: 300px;
+            height: 100px;
+            border: 1px solid #dadce0;
+        }
 
-            }
-
-    </table>
+        .div2 {
+            
+            width: 300px;
+            height: 100px;
+            border: 1px solid #dadce0;
+        }
+    </style>
 </body>
 </html>
