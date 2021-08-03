@@ -140,7 +140,7 @@ namespace BugTracker.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("mainPage", "User");
                         }
                     }
                 }

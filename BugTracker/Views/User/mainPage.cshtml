@@ -3,31 +3,33 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@if (User.Identity.IsAuthenticated)
+{
+    <!DOCTYPE html>
 
-<!DOCTYPE html>
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>mainPage</title>
-</head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-
+    </head>
+    <body>
+        <h1>Welcome Back! @HttpContext.Current.User.Identity.Name </h1>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
 
 
 
 
-    @{ var count = Model.Count();
 
-        <table style="float:left; min-height: 75px; max-width: 320px; margin-left: 320px; border: dashed;">
+        @{ var count = Model.Count();
+
+            <table style="float:left; min-height: 75px; width: 320px; margin-left: 280px; border:groove;">
                 <tr>
                     <td>
                         <h3>@Html.DisplayName("Tickets Available")</h3>
                         <h4>Currently: @count.ToString()</h4>
-                    <h5 style="text-align: center">View and Submit support tickets.</h5>
+                        <h5 style="text-align: center">View and Submit support tickets.</h5>
 
                         @using (Html.BeginForm())
                         {
@@ -39,42 +41,54 @@
                     </td>
                 </tr>
             </table>
-        
-                <table style="float:left; min-height: 75px; max-width: 320px; margin-left: 80px; border: dashed; ">
-                    <tr>
-                        <td>
-                            <h3>@Html.DisplayName("Tickets Available")</h3>
-                            <h4>Currently: @count.ToString()</h4>
-                            <h5 style="text-align: center">View and Submit support tickets.</h5>
 
-                            @using (Html.BeginForm())
-                            {
-                                @Html.AntiForgeryToken()
-                                <div style="text-align: center">
-                                    @Html.ActionLink("View Tickets", "GetTicketsIndex", "Ticket")
-                                </div>
-                            }
-                        </td>
-                    </tr>
-                </table>
+            <table style="float:left; min-height: 75px; width: 320px; margin-left: 80px; border: dashed; ">
+                <tr>
+                    <td>
+                        <h3>@Html.DisplayName("Tickets Available")</h3>
+                        <h4>Currently: @count.ToString()</h4>
+                        <h5 style="text-align: center">View and Submit support tickets.</h5>
 
-    
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <div style="text-align: center">
+                                @Html.ActionLink("View Tickets", "GetTicketsIndex", "Ticket")
+                            </div>
+                        }
+                    </td>
+                </tr>
+            </table>
 
-    }
 
-    <style>
-        .div1 {
-            left: auto;
-            width: 300px;
-            height: 100px;
-            border: 1px solid #dadce0;
+
         }
 
-        .div2 {
-            width: 300px;
-            height: 100px;
-            border: 1px solid #dadce0;
-        }
-    </style>
-</body>
+        <style>
+            .div1 {
+                left: auto;
+                width: 300px;
+                height: 100px;
+                border: 1px solid #dadce0;
+            }
+
+            .div2 {
+                width: 300px;
+                height: 100px;
+                border: 1px solid #dadce0;
+            }
+        </style>
+    </body>
 </html>
+            }
+    @if (!User.Identity.IsAuthenticated)
+    {
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div>
+                @Html.ActionLink("Login", "Login", "User")
+            </div>
+        }
+    }
