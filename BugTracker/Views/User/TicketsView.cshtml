@@ -18,6 +18,7 @@
         </div>
     }
 }
+@if (User.Identity.IsAuthenticated) {
 <table class="table">
     <tr">
         <th style="color: red;">
@@ -74,3 +75,4 @@
     <p>
         @Html.ActionLink("Create New", "TicketSystem", "User")
     </p>
+}

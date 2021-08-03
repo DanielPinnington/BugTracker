@@ -3,46 +3,49 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <div class="bottomCenter">
-        <title>
-            @ViewBag.Title - My ASP.NET Application
-        </title>
 
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-
-        </footer>
-        </div>
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("BugTracker", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
-            </div>
-            @if (!HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Register", "Registration", "User")</li>
-                        <li>@Html.ActionLink("Login", "Login", "User")</li>
-                    </ul>
+
+        <div class="navbar navbar-inverse navbar-fixed-bottom" style="background-color: rgba(34,34,34,1); border-block:none;">
+            <div class="container">
+                <center>
+                    <form action="https://www.github.com/danielpinnington" method="get" target="_blank">
+                    <button class="bottomCenterLink">Designed & Built by Daniel Pinnington</button>
+                    </form>
+                    </center>
+                    </div>
+                    </div>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("BugTracker", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
                 </div>
-            }
 
-           
-            @if (@HttpContext.Current.User.Identity.IsAuthenticated)
-            {
-                BugTracker.Models.BugTrackerDBEntities2 dc = new BugTracker.Models.BugTrackerDBEntities2();
-                var account = dc.Admins.Where(a => a.Username == HttpContext.Current.User.Identity.Name).FirstOrDefault();
+                @if (!HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Register", "Registration", "User")</li>
+                            <li>@Html.ActionLink("Login", "Login", "User")</li>
+                        </ul>
+                    </div>
+                }
+
+
+                @if (@HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    BugTracker.Models.BugTrackerDBEntities2 dc = new BugTracker.Models.BugTrackerDBEntities2();
+                    var account = dc.Admins.Where(a => a.Username == HttpContext.Current.User.Identity.Name).FirstOrDefault();
 
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -56,100 +59,86 @@
                             }
                         </ul>
                     </div>
-            }
-            @if (User.Identity.IsAuthenticated) // Checks if logged in or not within layout
-            {
-        <div class="topright">
+                }
+                @if (User.Identity.IsAuthenticated) // Checks if logged in or not within layout
+                {
+                    <div class="topright">
 
 
-            <div class="dropdown">
-                <img src="~/Images/loggedin.png" style="width:20px" /><button class="dropbtn" style="color: #9d9d9d;">@HttpContext.Current.User.Identity.Name</button>
-                <div class="dropdown-content">
-                        @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
-                        {
-                            <a href="javascript:document.getElementById('logoutForm').submit()" style="color: black"><img src="~/Images/signout.png" style="width:20px" /> Logout</a>
-                        }
-                </div>
-            </div>
-        </div>
-            }
-
-
-        </div>
-                </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p></p>
-
-        </footer>
-        <form action="https://www.github.com/danielpinnington" method="get" target="_blank">
-            <center><button class="bottomCenterLink">Designed & Built by Daniel Pinnington</button></center>
-        </form>
-
-    </div>
-    <style>
-
-        /* Dropdown Button */
-        .dropbtn {
-            background-color: transparent;
-            color: white;
-            padding: 16px;
-            font-size: 16px;
-            border: none;
-        }
-
-        /* The container <div> - needed to position the dropdown content */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            background-color: transparent;
-        }
-
-        /* Dropdown Content (Hidden by Default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f1f1f1;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-
-            /* Links inside the dropdown */
-            .dropdown-content a {
-                color: #9d9d9d;
-               
-                padding: 12px 16px;
-                text-decoration: none;
-                display: block;
-            }
-
-                /* Change color of dropdown links on hover */
-                .dropdown-content a:hover {
-                    color: black;
+                        <div class="dropdown">
+                            <img src="~/Images/loggedin.png" style="width:20px" /><button class="dropbtn" style="color: #9d9d9d;">@HttpContext.Current.User.Identity.Name</button>
+                            <div class="dropdown-content">
+                                @using (Html.BeginForm("Logout", "User", FormMethod.Post, new { id = "logoutForm" }))
+                                {
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" style="color: black"><img src="~/Images/signout.png" style="width:20px" /> Logout</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 }
 
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-            background-color: transparent;
-        }
 
-        /* Change the background color of the dropdown button when the dropdown content is shown */
-        .dropdown:hover .dropbtn {
-            background-color: transparent;
-        }
+            </div>
+        </div>
+        <div class="container body-content">
+            @RenderBody()
 
-        .topright {
-            position: absolute;
-            top: 2px;
-            right: 200px;
-            font-size: 18px;
-            color: #9d9d9d;
-        }
-            .topright:hover {
+            <hr />
+        </div>
+      
+        <style>
+
+            /* Dropdown Button */
+            .dropbtn {
+                background-color: transparent;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+            }
+
+            /* The container <div> - needed to position the dropdown content */
+            .dropdown {
+                position: relative;
+                display: inline-block;
+                background-color: transparent;
+            }
+
+            /* Dropdown Content (Hidden by Default) */
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+
+                /* Links inside the dropdown */
+                .dropdown-content a {
+                    color: #9d9d9d;
+                    padding: 12px 16px;
+                    text-decoration: none;
+                    display: block;
+                }
+
+                    /* Change color of dropdown links on hover */
+                    .dropdown-content a:hover {
+                        color: black;
+                    }
+
+            /* Show the dropdown menu on hover */
+            .dropdown:hover .dropdown-content {
+                display: block;
+                background-color: transparent;
+            }
+
+            /* Change the background color of the dropdown button when the dropdown content is shown */
+            .dropdown:hover .dropbtn {
+                background-color: transparent;
+            }
+
+            .topright {
                 position: absolute;
                 top: 2px;
                 right: 200px;
@@ -157,53 +146,55 @@
                 color: #9d9d9d;
             }
 
-        .bottomCenterLink {
-            padding-top: 10px;
-            position: static;
-            background-color: transparent;
-            position: sticky;
-            left: 50%;
-            bottom: 20px;
-            transform: translate(-50%, -50%);
-            margin: 0 auto;
-            right: 25%;
-            margin: 0 auto;
-            outline: none;
-            font-size: 13px;
-            color: Grey;
-            border: none;
-            transition: opacity 0.1s ease-out;
-        }
+                .topright:hover {
+                    position: absolute;
+                    top: 2px;
+                    right: 200px;
+                    font-size: 18px;
+                    color: #9d9d9d;
+                }
+
+            .bottomCenterLink {
+                bottom: 5px;
+
+                position: static;
+                background-color: transparent;
+                position: absolute;
+                left: 50%;
+
+                transform: translate(-50%, -50%);
+                margin: 0 auto;
+                right: 25%;
+                margin: 0 auto;
+                outline: none;
+                font-size: 13px;
+                color: Grey;
+                border: none;
+                transition: opacity 0.1s ease-out;
+            }
 
                 .bottomCenterLink:hover {
                     font-size: 13px;
-                    color: Black;
+                    color: white;
                     border: none;
-                    position: sticky;
-
+                    position: absolute;
                     transition: 0.3s ease-out;
                 }
 
-        .bottomCenter {
-            padding-top: 40px;
-            padding-bottom: 10px;
-            position: absolute;
-            vertical-align: middle;
-            background-color: transparent;
-            left: 50%;
-            bottom: -20px;
-            transform: translate(-50%, -50%);
-            margin: 0 auto;
-            outline: none;
-            font-size: 13px;
-            color: Grey;
-            border: none;
-            transition: opacity 0.1s ease-out;
-        }
+            .bottomCenter {
+                position: absolute;
+                vertical-align: middle;
+                background-color: transparent;
+                outline: none;
+                font-size: 13px;
+                color: Grey;
+                border: none;
+                transition: opacity 0.1s ease-out;
+            }
+        </style>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+    </body>
 
-    </style>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-</body>
 </html>

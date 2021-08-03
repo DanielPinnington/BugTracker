@@ -23,13 +23,25 @@
     @{ var count = Model.Count();
 
         <tr>
-                <td>
+            <td>
 
                     <div style="display: flex; justify-content: space-around">
-                            <div>@Html.DisplayName("Tickets Available")<br></br>@count.ToString()</div>
-                            <div>@Html.DisplayName("Tickets Available")<br></br>@count.ToString()</div>
-                        </div>
-                </td>
+                            <div>
+                                @Html.DisplayName("Tickets Available") @count.ToString()
+
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div>
+                                        @Html.ActionLink("View Tickets", "GetTicketsIndex", "Ticket")
+                                    </div>
+                                }
+                            </div>
+                        <div>@Html.DisplayName("Tickets Available") 
+                        @count.ToString()</div>
+                    </div>
+            </td>
+            <div class="pull-right">@Html.DisplayName("Tickets Available")</div>
         </tr>
     }
 
