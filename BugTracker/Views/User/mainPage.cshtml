@@ -34,9 +34,14 @@
                         @using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
-                            <div style="text-align: center">
-                                @Html.ActionLink("View Tickets", "GetTicketsIndex", "Ticket")
-                            </div>
+                    <center>
+                        <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex", "Ticket")'">
+                            View Tickets
+                        </button>
+                    </center>
+                    <ul>
+
+                    </ul>
                         }
                     </td>
                 </tr>
