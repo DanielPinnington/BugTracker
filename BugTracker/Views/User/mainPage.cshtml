@@ -22,68 +22,72 @@
 
 
 
+
         @{ var count = Model.Count();
+            var priorityLowCount = Model.Count(x => x.Priorities == "Low");
+            var priorityMediumCount = Model.Count(x => x.Priorities == "Medium");
+            var priorityHighCount = Model.Count(x => x.Priorities == "High");
+            var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
 
-            <table style="float:left; min-height: 75px; width: 320px; margin-left: 280px; border:groove;">
-                <tr>
-                    <td>
-                        <h3>@Html.DisplayName("Tickets Available")</h3>
-                        <h4>Currently: @count.ToString()</h4>
-                        <h5 style="text-align: center">View and Submit support tickets.</h5>
+            var recentTickets = Model.Count(x => x.CreatedDate >= monday); //This calculates a week from mondays tickets
 
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-                    <center>
-                        <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex", "Ticket")'">
-                            View Tickets
-                        </button>
-                    </center>
-                    <ul>
+                <table style="float:left; min-height: 75px; width: 320px; margin-left: 280px; border:groove;">
+                    <tr>
+                        <td>
+                            <h3>@Html.DisplayName("Tickets Available")</h3>
+                            <h4>Currently: @count.ToString()</h4>
+                            <h5 style="text-align: center">View and Submit support tickets.</h5>
 
-                    </ul>
-                        }
-                    </td>
-                </tr>
-            </table>
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <center>
+                                    <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex", "Ticket")'">
+                                        View Tickets
+                                    </button>
+                                </center>
+                                <ul>
+                                </ul>
+                            }
+                        </td>
+                    </tr>
+                </table>
 
-            <table style="float:left; min-height: 75px; width: 320px; margin-left: 80px; border: dashed; ">
-                <tr>
-                    <td>
-                        <h3>@Html.DisplayName("Tickets Available")</h3>
-                        <h4>Currently: @count.ToString()</h4>
-                        <h5 style="text-align: center">View and Submit support tickets.</h5>
+                <table style="float:left; min-height: 75px; width: 320px; margin-left: 80px; border: dashed; ">
+                    <tr>
+                        <td>
+                            <h3>@Html.DisplayName("Tickets Available")</h3>
+                            <h4>Low Priority Tickets: @recentTickets.ToString()</h4>
+                            <h5 style="text-align: center">View and Submit support tickets.</h5>
 
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-                            <div style="text-align: center">
-                                @Html.ActionLink("View Tickets", "GetTicketsIndex", "Ticket")
-                            </div>
-                        }
-                    </td>
-                </tr>
-            </table>
+                            @using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                <div style="text-align: center">
+                                    @Html.ActionLink("View Tickets", "GetTicketsIndex", "Ticket")
+                                </div>
+                            }
 
-
-
-        }
-
-        <style>
-            .div1 {
-                left: auto;
-                width: 300px;
-                height: 100px;
-                border: 1px solid #dadce0;
+                        </td>
+                    </tr>
+                </table>
             }
 
-            .div2 {
-                width: 300px;
-                height: 100px;
-                border: 1px solid #dadce0;
-            }
-        </style>
-    </body>
+            <style>
+                .div1 {
+                    left: auto;
+                    width: 300px;
+                    height: 100px;
+                    border: 1px solid #dadce0;
+                }
+
+                .div2 {
+                    width: 300px;
+                    height: 100px;
+                    border: 1px solid #dadce0;
+                }
+            </style>
+        </body>
 </html>
             }
     @if (!User.Identity.IsAuthenticated)
