@@ -36,7 +36,7 @@
                         <td>
                             <h3>@Html.DisplayName("Tickets Available")</h3>
                             <h4>Currently: @count.ToString()</h4>
-                            <h5 style="text-align: center">View and Submit support tickets.</h5>
+                            <h5 style="text-align: center">View and Submit bug tickets.</h5>
 
                             @using (Html.BeginForm())
                             {
@@ -56,16 +56,23 @@
                 <table style="float:left; min-height: 75px; width: 320px; margin-left: 80px; border: dashed; ">
                     <tr>
                         <td>
-                            <h3>@Html.DisplayName("Tickets Available")</h3>
-                            <h4>Low Priority Tickets: @recentTickets.ToString()</h4>
-                            <h5 style="text-align: center">View and Submit support tickets.</h5>
+                            <h3>@Html.DisplayName("Tickets this week: " + recentTickets.ToString())</h3>
+
+                            <h4>Low Priority Tickets: @priorityLowCount.ToString()</h4>
+                            <h4>Medium Priority Tickets: @priorityMediumCount.ToString()</h4>
+                            <h4>High Priority Tickets: @priorityHighCount.ToString()</h4>
+                            <h5 style="text-align: center">View and Submit bug tickets.</h5>
 
                             @using (Html.BeginForm())
                             {
                                 @Html.AntiForgeryToken()
-                                <div style="text-align: center">
-                                    @Html.ActionLink("View Tickets", "GetTicketsIndex", "Ticket")
-                                </div>
+                                <center>
+                                    <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex", "Ticket")'">
+                                        View Tickets
+                                    </button>
+                                </center>
+                                <ul>
+                                </ul>
                             }
 
                         </td>
