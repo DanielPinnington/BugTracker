@@ -291,7 +291,7 @@
     </Compile>
     <Compile Include="Models\ResetPasswordModel.cs" />
     <Compile Include="Models\Ticket.cs">
-      <DependentUpon>BugTracking.tt</DependentUpon>
+      <DependentUpon>TicketSystemDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TicketSystemDB.Context.cs">
       <AutoGen>True</AutoGen>

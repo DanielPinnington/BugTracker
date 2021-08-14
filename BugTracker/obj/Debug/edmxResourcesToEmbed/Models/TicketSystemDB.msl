@@ -4,6 +4,8 @@
     <EntitySetMapping Name="Tickets">
       <EntityTypeMapping TypeName="BugTrackerDBModel2.Ticket">
         <MappingFragment StoreEntitySet="Ticket">
+          <ScalarProperty Name="CurrentProject" ColumnName="CurrentProject" />
+          <ScalarProperty Name="CurrentUser" ColumnName="CurrentUser" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Description" ColumnName="Description" />

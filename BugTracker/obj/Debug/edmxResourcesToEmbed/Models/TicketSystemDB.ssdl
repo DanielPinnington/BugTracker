@@ -6,9 +6,11 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Description" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
     <Property Name="CreatedDate" Type="date" Nullable="false" />
     <Property Name="Priorities" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CurrentUser" Type="nvarchar" MaxLength="500" />
+    <Property Name="CurrentProject" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityContainer Name="BugTrackerDBModel2StoreContainer">
     <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />

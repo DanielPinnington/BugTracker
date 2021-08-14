@@ -10,6 +10,7 @@
     <Property Name="CreatedDate" Type="date" Nullable="false" />
     <Property Name="Priorities" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="CurrentUser" Type="nvarchar" MaxLength="500" />
+    <Property Name="CurrentProject" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityContainer Name="BugTrackerDBModel3StoreContainer">
     <EntitySet Name="Ticket" EntityType="Self.Ticket" Schema="dbo" store:Type="Tables" />

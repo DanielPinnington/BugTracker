@@ -6,9 +6,11 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="Priorities" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CurrentUser" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="CurrentProject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityContainer Name="BugTrackerDBEntities4" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Tickets" EntityType="Self.Ticket" />
