@@ -39,8 +39,8 @@
         </div>
     </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.CreatedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="form-group" style="display: none;">
+        @Html.LabelFor(model => model.CreatedDate, "Created Date", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
 
             @Html.TextBoxFor(model => model.CreatedDate, new { Value = DateTime.Now.ToShortDateString() })
@@ -49,7 +49,7 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.CurrentProject, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.LabelFor(model => model.CurrentProject, "Current Project", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.TextBoxFor(model => model.CurrentProject)
             @Html.ValidationMessageFor(model => model.CurrentProject, "", new { @class = "text-danger" })

@@ -20,6 +20,7 @@ namespace BugTracker.Models
         public System.DateTime CreatedDate { get; set; }
         public string Priorities { get; set; }
         public string CurrentUser { get; set; }
+        
         public string CurrentProject { get; set; }
     }
 }
