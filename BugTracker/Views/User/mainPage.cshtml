@@ -32,75 +32,102 @@
 
             var recentTickets = Model.Count(x => x.CreatedDate >= monday); //This calculates a week from mondays tickets
 
-                <table style="float:left; min-height: 75px; width: 320px; margin-left: 280px; border:groove;">
-                    <tr>
-                        <td>
-                            <h3>@Html.DisplayName("Tickets Available")</h3>
-                            <h4>Currently: @count.ToString()</h4>
-                            <h5 style="text-align: center">View and Submit bug tickets.</h5>
+            <table style="float:left; min-height: 75px; width: 320px; margin-left: 10px; border:groove;">
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-success" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Low';">
+                            <h3>@Html.DisplayName("Unresolved Low Tickets")</h3>
+                            @priorityLowCount.ToString()
+                        </button>
+                    </td>
+                </tr>
+            </table>
 
-                            @using (Html.BeginForm())
-                            {
-                                @Html.AntiForgeryToken()
-                                <center>
-                                    <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex", "Ticket")'">
-                                        View Tickets
-                                    </button>
-                                </center>
-                                <ul>
-                                </ul>
-                            }
-                        </td>
-                    </tr>
-                </table>
+            <table style="float:left; min-height: 75px; width: 320px; margin-left: 60px; border:groove;">
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-success" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Medium';">
+                            <h3>@Html.DisplayName("Unresolved Medium Tickets")</h3>
+                            @priorityMediumCount.ToString()
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <table style="float:left; min-height: 75px; width: 320px; margin-left: 90px; border:groove;">
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-success" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=High';">
+                            <h3>@Html.DisplayName("Unresolved High Tickets")</h3>
+                            @priorityHighCount.ToString()
+                        </button>
+                    </td>
+                </tr>
+            </table>
 
-                <table style="float:left; min-height: 75px; width: 320px; margin-left: 80px; border: dashed; ">
-                    <tr>
-                        <td>
-                            <h3>@Html.DisplayName("Tickets this week: " + recentTickets.ToString())</h3>
+            <table style="float:left; min-height: 75px; width: 320px; margin-left: 10px; margin-top: 30px; left: 100px; bottom: 100px; border:groove;">
+                <tr>
+                    <td>
+                        <h3>@Html.DisplayName("Tickets Available")</h3>
+                        <h4>Currently: @count.ToString()</h4>
+                        <h5 style="text-align: center">View and Submit bug tickets.</h5>
 
-                            <h4><a href='@Url.Action("GetTicketsIndex/Low", "Ticket")'>Low Priority Tickets: @priorityLowCount.ToString()</a></h4>
-                            <h4><a href='@Url.Action("GetTicketsIndex/Medium", "Ticket")'> Medium Priority Tickets: @priorityMediumCount.ToString()</a></h4>
-                            <h4><a href='@Url.Action("GetTicketsIndex/High", "Ticket")'> High Priority Tickets: @priorityHighCount.ToString()</a></h4>
-                            <h5 style="text-align: center">View and Submit bug tickets.</h5>
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <center>
+                                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex", "Ticket")'">
+                                    View Tickets
+                                </button>
+                            </center>
+                            <ul>
+                            </ul>
+                        }
+                    </td>
+                </tr>
+            </table>
 
-                                <h4><a href='@Url.Action("GetTicketsIndex/ ", "Ticket")'> Unassigned Projects</a></h4>
+            <table style="min-height: 75px; width: 320px; margin-left: 10px; margin-top: 320px; bottom: 100px; border:groove;">
+                <tr>
+                    <td>
+                        <h3>@Html.DisplayName("Tickets this week: " + recentTickets.ToString())</h3>
 
-                            @using (Html.BeginForm())
-                            {
-                                @Html.AntiForgeryToken()
-                                <center>
-                            @{ /*<button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex", "Ticket")'"> (This is when the project goes live) */} 
-                                    <button type="button" class="btn btn-success" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Medium';">
+                        <h5 style="text-align: center">View and Submit bug tickets.</h5>
 
-                                        View Tickets
-                                    </button>
-                            <a href="https://localhost:44392/Ticket/GetTicketsIndex?search=Medium">this</a>
-                        </center>
-                                <ul>
-                                </ul>
-                            }
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            <center>
+                                @{ /*<button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex", "Ticket")'"> (This is when the project goes live) */}
+                                <button type="button" class="btn btn-success" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Medium';">
 
-                        </td>
-                    </tr>
-                </table>
+                                    View Tickets
+                                </button>
+                                <a href="https://localhost:44392/Ticket/GetTicketsIndex?search=Medium">this</a>
+                            </center>
+                            <ul>
+                            </ul>
+                        }
+
+                    </td>
+                </tr>
+            </table>
+        }
+
+        <style>
+            .div1 {
+                left: auto;
+                width: 300px;
+                height: 100px;
+                border: 1px solid #dadce0;
             }
 
-            <style>
-                .div1 {
-                    left: auto;
-                    width: 300px;
-                    height: 100px;
-                    border: 1px solid #dadce0;
-                }
-
-                .div2 {
-                    width: 300px;
-                    height: 100px;
-                    border: 1px solid #dadce0;
-                }
-            </style>
-        </body>
+            .div2 {
+                width: 300px;
+                height: 100px;
+                border: 1px solid #dadce0;
+            }
+        </style>
+    </body>
 </html>
             }
     @if (!User.Identity.IsAuthenticated)
