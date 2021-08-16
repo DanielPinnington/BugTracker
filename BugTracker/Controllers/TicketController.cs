@@ -14,17 +14,17 @@ namespace BugTracker.Controllers
 {
     public class TicketController : Controller
     {
-        
+
         // GET: Ticket
-        public ActionResult GetTicketsIndex(int page = 1, string sort = "Priorities", string sortdir = "asc", string id = "")
+        public ActionResult GetTicketsIndex(int page = 1, string sort = "Priorities", string sortdir = "asc", string search = "")
         {
             int pageSize = 10;
             int totalRecord = 0;
             if (page < 1) page = 1;
             int skip = (page * pageSize) - pageSize;
-            var data = GetTickets(id, sort, sortdir, skip, pageSize, out totalRecord);
+            var data = GetTickets(search, sort, sortdir, skip, pageSize, out totalRecord);
             ViewBag.TotalRows = totalRecord;
-            ViewBag.search = id;
+            ViewBag.search = search;
             return View(data);
         }
         public List<Ticket> GetTickets(string search, string sort, string sortdir, int skip, int pageSize, out int totalRecord)

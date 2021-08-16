@@ -27,6 +27,7 @@
             var priorityLowCount = Model.Count(x => x.Priorities == "Low");
             var priorityMediumCount = Model.Count(x => x.Priorities == "Medium");
             var priorityHighCount = Model.Count(x => x.Priorities == "High");
+            var unassignedProjects = Model.Count(x => x.CurrentProject == null);
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
 
             var recentTickets = Model.Count(x => x.CreatedDate >= monday); //This calculates a week from mondays tickets
@@ -63,14 +64,19 @@
                             <h4><a href='@Url.Action("GetTicketsIndex/High", "Ticket")'> High Priority Tickets: @priorityHighCount.ToString()</a></h4>
                             <h5 style="text-align: center">View and Submit bug tickets.</h5>
 
+                                <h4><a href='@Url.Action("GetTicketsIndex/ ", "Ticket")'> Unassigned Projects</a></h4>
+
                             @using (Html.BeginForm())
                             {
                                 @Html.AntiForgeryToken()
                                 <center>
-                                    <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex/Low", "Ticket")'">
+                            @{ /*<button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex", "Ticket")'"> (This is when the project goes live) */} 
+                                    <button type="button" class="btn btn-success" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Medium';">
+
                                         View Tickets
                                     </button>
-                                </center>
+                            <a href="https://localhost:44392/Ticket/GetTicketsIndex?search=Medium">this</a>
+                        </center>
                                 <ul>
                                 </ul>
                             }
