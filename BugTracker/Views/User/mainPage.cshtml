@@ -58,16 +58,16 @@
                         <td>
                             <h3>@Html.DisplayName("Tickets this week: " + recentTickets.ToString())</h3>
 
-                            <h4>Low Priority Tickets: @priorityLowCount.ToString()</h4>
-                            <h4>Medium Priority Tickets: @priorityMediumCount.ToString()</h4>
-                            <h4>High Priority Tickets: @priorityHighCount.ToString()</h4>
+                            <h4><a href='@Url.Action("GetTicketsIndex/Low", "Ticket")'>Low Priority Tickets: @priorityLowCount.ToString()</a></h4>
+                            <h4><a href='@Url.Action("GetTicketsIndex/Medium", "Ticket")'> Medium Priority Tickets: @priorityMediumCount.ToString()</a></h4>
+                            <h4><a href='@Url.Action("GetTicketsIndex/High", "Ticket")'> High Priority Tickets: @priorityHighCount.ToString()</a></h4>
                             <h5 style="text-align: center">View and Submit bug tickets.</h5>
 
                             @using (Html.BeginForm())
                             {
                                 @Html.AntiForgeryToken()
                                 <center>
-                                    <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex", "Ticket")'">
+                                    <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex/Low", "Ticket")'">
                                         View Tickets
                                     </button>
                                 </center>
