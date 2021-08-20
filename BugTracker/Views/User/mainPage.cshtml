@@ -105,13 +105,102 @@
                             </center>
                             <ul>
                             </ul>
-
                         }
                     </td>
                 </tr>
             </table>
+        }
+        <table class="table">
+            <tr">
+                <th style="color: red;">
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Priorities)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CurrentUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CurrentProject)
+                </th>
 
-        <div id="grid" style="float: right; height: 10px; width: 740px; margin-right: 14px; margin-top: -330px;">
+                <th></th>
+            </tr">
+
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.Description, new { @class = "hidden" })
+
+                    </td>
+                    <td>
+                        @item.CreatedDate.ToShortDateString()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Priorities)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrentUser)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CurrentProject)
+                    </td>
+
+                    <td>
+
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+            <style>
+                .div1 {
+                    left: auto;
+                    width: 300px;
+                    height: 100px;
+                    border: 1px solid #dadce0;
+                }
+
+                .div2 {
+                    width: 300px;
+                    height: 100px;
+                    border: 1px solid #dadce0;
+                }
+            </style>
+    </body>
+</html>
+
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            @Html.ActionLink("Login", "Login", "User")
+        </div>
+    }
+}
+@{ 
+    /*
+           <div id="grid" style="float: right; height: 10px; width: 740px; margin-right: 14px; margin-top: -330px;">
                     @grid.GetHtml(
 
                                 tableStyle: "table table-responsive table-bordered",
@@ -125,35 +214,5 @@
                                  //format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Description">@item.Description</div></text>
                                  )
                              )
-                    </div>
-                    }
-
-                    <style>
-                        .div1 {
-                            left: auto;
-                            width: 300px;
-                            height: 100px;
-                            border: 1px solid #dadce0;
-                        }
-
-                        .div2 {
-                            width: 300px;
-                            height: 100px;
-                            border: 1px solid #dadce0;
-                        }
-                    </style>
-        </body>
-</html>
-}
-
-@if (!User.Identity.IsAuthenticated)
-{
-    using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div>
-            @Html.ActionLink("Login", "Login", "User")
-        </div>
-    }
+                    </div>*/
 }

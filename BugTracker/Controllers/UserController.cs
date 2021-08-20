@@ -367,14 +367,14 @@ namespace BugTracker.Controllers
         {
             BugTracking db = new BugTracking();
 
-            return View(db.Tickets.ToList());
+            return View(db.Tickets.OrderByDescending(x => x.Id).ToList());
         }
 
         public ActionResult mainPage(Ticket user)
         {
             BugTracking db = new BugTracking();
 
-            return View(db.Tickets.ToList());
+            return View(db.Tickets.OrderByDescending(x => x.Id).Take(4).ToList()); //Take(5).ToList()) THIS SHOWS 5 INSTEAD OF ALL
         }
 
         public ActionResult Delete(int id)

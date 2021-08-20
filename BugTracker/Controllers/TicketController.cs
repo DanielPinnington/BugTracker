@@ -31,11 +31,11 @@ namespace BugTracker.Controllers
             {
                 using(BugTracking dc = new BugTracking())
                 {
+                
                 var v = (from a in dc.Tickets
                          where
                              a.Title.Contains(search) ||
                              a.Description.Contains(search) ||
-                             
                              a.CurrentUser.Contains(search) ||
                              a.Priorities.Contains(search) //Might comment this ou later
                              
@@ -51,8 +51,8 @@ namespace BugTracker.Controllers
                                   Priorities = b.Priorities
                               });
                 }
-
-                    totalRecord = v.Count();
+                
+                totalRecord = v.Count();
                 v = v.OrderBy(sort + " " + sortdir);
                 
 
