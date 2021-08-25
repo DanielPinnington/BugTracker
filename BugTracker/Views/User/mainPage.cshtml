@@ -38,10 +38,10 @@
 
             var recentTickets = Model.Count(x => x.CreatedDate >= monday); //This calculates a week from mondays tickets
 
-            <table style="float:left; min-height: 75px; width: 320px; margin-left: 10px; border:groove;">
+            <table style="float:left; min-height: 75px; width: 320px; margin-left: 10px; border:none;">
                 <tr>
                     <td>
-                        <button type="button" class="btn btn-success" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Low';">
+                        <button type="button" class="btn btn-success" style="width: 100%;"onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Low';">
                             <h3>@Html.DisplayName("Unresolved Low Tickets")</h3>
                             @priorityLowCount.ToString()
                         </button>
@@ -49,20 +49,20 @@
                 </tr>
             </table>
 
-            <table style="float:left; min-height: 75px; width: 320px; margin-left: 60px; border:groove;">
+            <table style="float:left; min-height: 75px; width: 320px; margin-left: 60px; border:none;">
                 <tr>
                     <td>
-                        <button type="button" class="btn btn-success" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Medium';">
+                        <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Medium';">
                             <h3>@Html.DisplayName("Unresolved Medium Tickets")</h3>
                             @priorityMediumCount.ToString()
                         </button>
                     </td>
                 </tr>
             </table>
-            <table style="float:left; min-height: 75px; width: 320px; margin-left: 90px; border:groove;">
+            <table style="float:left; min-height: 75px; width: 320px; margin-left: 90px; border:none;">
                 <tr>
                     <td>
-                        <button type="button" class="btn btn-success" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=High';">
+                        <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=High';">
                             <h3>@Html.DisplayName("Unresolved High Tickets")</h3>
                             @priorityHighCount.ToString()
                         </button>
@@ -144,7 +144,7 @@
 
             @foreach (var item in Model)
             {
-                <tr>
+                <tr style="cursor:pointer" onclick="Redirect()">
                     <td>
                         @Html.DisplayFor(modelItem => item.Title)
                     </td>
@@ -168,6 +168,14 @@
                 </tr>
             }
             <style>
+                tr:hover, tr.selected {
+                    background-color: rgb(128, 128, 128, .4);
+                }
+
+                td {
+                    padding: 5px;
+                }
+
                 .div1 {
                     left: auto;
                     width: 300px;
@@ -197,6 +205,16 @@
         </div>
     }
 }
+
+<script type="text/javascript">
+    function Redirect() {
+        location.href = "https://localhost:44392/Ticket/GetTicketsIndex";
+    }
+
+    $("tr").click(function () {
+        $(this).addClass("selected").siblings().removeClass("selected");
+    });
+</script>
 @{
     /*
            <div id="grid" style="float: right; height: 10px; width: 740px; margin-right: 14px; margin-top: -330px;">

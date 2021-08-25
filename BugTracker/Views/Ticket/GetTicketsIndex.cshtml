@@ -33,13 +33,13 @@
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a href="#" class="navbar-brand">Search</a>
+                        <a href="#" class="navbar-brand"  onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex';" >Search</a>
                     </div>
                     <div class="collapse navbar-collapse">
                         @using (Html.BeginForm("GetTicketsIndex", "Ticket", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
                         {
                             <div class="form-group">
-                                <input type="text" name="search" value="@ViewBag.search" class="form-control" placeholder="search" />
+                                <input type="text" name="Search" value="@ViewBag.search" class="form-control" placeholder="search" />
                             </div>
                             <button type="submit" value="Search" class="btn btn-success">Search</button>
                         }
