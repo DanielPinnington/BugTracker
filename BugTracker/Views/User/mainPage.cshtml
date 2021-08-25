@@ -1,8 +1,10 @@
-﻿@model IEnumerable<BugTracker.Models.Ticket>
-  
+﻿@using BugTracker.Models
+@model IEnumerable<BugTracker.Models.Ticket>
+
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var grid = new WebGrid(canPage: true, rowsPerPage: 4);
+    var grid = new WebGrid(canPage: true, rowsPerPage: 10);
     grid.Bind(source: Model);
 }
 
@@ -23,10 +25,15 @@
 
 
         @{ var count = Model.Count();
-            var priorityLowCount = Model.Count(x => x.Priorities == "Low");
-            var priorityMediumCount = Model.Count(x => x.Priorities == "Medium");
-            var priorityHighCount = Model.Count(x => x.Priorities == "High");
-            var unassignedProjects = Model.Count(x => x.CurrentProject == null);
+
+            BugTracking db = new BugTracking();
+
+            var dbCount = db.Tickets.Count();
+
+            var priorityLowCount = db.Tickets.Count(x => x.Priorities == "Low");
+            var priorityMediumCount = db.Tickets.Count(x => x.Priorities == "Medium");
+            var priorityHighCount = db.Tickets.Count(x => x.Priorities == "High");
+            var unassignedProjects = db.Tickets.Count(x => x.CurrentProject == null);
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
 
             var recentTickets = Model.Count(x => x.CreatedDate >= monday); //This calculates a week from mondays tickets
@@ -67,7 +74,7 @@
                 <tr>
                     <td>
                         <h3>@Html.DisplayName("Tickets Available")</h3>
-                        <h4>Currently: @count.ToString()</h4>
+                        <h4>Currently: @dbCount.ToString()</h4>
                         <h5 style="text-align: center">View and Submit bug tickets.</h5>
 
                         @using (Html.BeginForm())
@@ -110,25 +117,25 @@
                 </tr>
             </table>
         }
-        <table class="table">
+        <table class="table" style="float: right; min-height: 85px; width: 745px; margin-right: 10px; border: groove; margin-top: -350px;">
             <tr">
                 <th style="color: red;">
-                    @Html.DisplayNameFor(model => model.Title)
+                    @Html.DisplayNameFor(models => models.Title)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    @Html.DisplayNameFor(models => models.Description)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CreatedDate)
+                    @Html.DisplayNameFor(models => models.CreatedDate)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Priorities)
+                    @Html.DisplayNameFor(models => models.Priorities)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CurrentUser)
+                    @Html.DisplayNameFor(models => models.CurrentUser)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.CurrentProject)
+                    @Html.DisplayNameFor(models => models.CurrentProject)
                 </th>
 
                 <th></th>
@@ -157,14 +164,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CurrentProject)
-                    </td>
-
-                    <td>
-
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                     </td>
                 </tr>
             }
@@ -198,7 +197,7 @@
         </div>
     }
 }
-@{ 
+@{
     /*
            <div id="grid" style="float: right; height: 10px; width: 740px; margin-right: 14px; margin-top: -330px;">
                     @grid.GetHtml(
