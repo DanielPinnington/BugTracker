@@ -37,40 +37,40 @@
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
 
             var recentTickets = Model.Count(x => x.CreatedDate >= monday); //This calculates a week from mondays tickets
-
-            <table style="float:left; min-height: 75px; width: 320px; margin-left: 10px; border:none;">
-                <tr>
-                    <td>
-                        <button type="button" class="btn btn-success" style="width: 100%;"onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Low';">
-                            <h3>@Html.DisplayName("Unresolved Low Tickets")</h3>
-                            @priorityLowCount.ToString()
-                        </button>
-                    </td>
-                </tr>
+            
+            <table style="float: left; width: 100%; min-width: 350px; min-height: 10px; max-width: 30px; position: fixed; border: none; z-index: 1;">
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-success" style="width: 100%; min-width: 20px;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Low';">
+                                    <h3>@Html.DisplayName("Unresolved Low Tickets")</h3>
+                                    @priorityLowCount.ToString()
+                                </button>
+                            </td>
+                            <table style="float: left; width: 100%; min-width: 350px; max-width: 30px; margin-left: 400px; position: fixed; border: none; ">
+                                <tr>
+                                    <td>
+                                        <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Medium';">
+                                            <h3>@Html.DisplayName("Unresolved Medium Tickets")</h3>
+                                            @priorityMediumCount.ToString()
+                                        </button>
+                                    </td>
+                                    <table style="float: left; width: 100%; min-width: 350px; max-width: 250px; margin-left: 800px; position: static; border: none; ">
+                                        <tr>
+                                            <td>
+                                                <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=High';">
+                                                    <h3>@Html.DisplayName("Unresolved High Tickets")</h3>
+                                                    @priorityHighCount.ToString()
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </tr>
+                            </table>
+                        </tr>
             </table>
 
-            <table style="float:left; min-height: 75px; width: 320px; margin-left: 60px; border:none;">
-                <tr>
-                    <td>
-                        <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Medium';">
-                            <h3>@Html.DisplayName("Unresolved Medium Tickets")</h3>
-                            @priorityMediumCount.ToString()
-                        </button>
-                    </td>
-                </tr>
-            </table>
-            <table style="float:left; min-height: 75px; width: 320px; margin-left: 90px; border:none;">
-                <tr>
-                    <td>
-                        <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=High';">
-                            <h3>@Html.DisplayName("Unresolved High Tickets")</h3>
-                            @priorityHighCount.ToString()
-                        </button>
-                    </td>
-                </tr>
-            </table>
 
-            <table style="float:left; min-height: 75px; width: 320px; margin-left: 10px; margin-top: 30px; left: 100px; bottom: 100px; border:groove;">
+            <table style="float: left; width: 19%; min-width: 24px; margin: 10px 0; margin-top: 120px; position:fixed; border:groove; ">
                 <tr>
                     <td>
                         <h3>@Html.DisplayName("Tickets Available")</h3>
@@ -117,7 +117,7 @@
                 </tr>
             </table>
         }
-        <table class="table" style="float: right; min-height: 85px; width: 745px; margin-right: 10px; border: groove; margin-top: -350px;">
+        <table class="table" style="float: right; height: 20%; min-height: 20%; min-width: 40%; width: 20%; margin: 400px; margin-top: -370px;  position: fixed; border: groove;">
             <tr">
                 <th style="color: red;">
                     @Html.DisplayNameFor(models => models.Title)
@@ -173,7 +173,7 @@
                 }
 
                 td {
-                    padding: 5px;
+                    padding: 0px;
                 }
 
                 .div1 {
