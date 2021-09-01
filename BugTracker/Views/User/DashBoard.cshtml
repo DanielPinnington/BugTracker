@@ -37,7 +37,7 @@
             <table style="float: left; width: 100%; min-width: 350px; min-height: 10px; max-width: 30px; position: fixed; border: none; z-index: 1;">
                 <tr>
                     <td>
-                        <button type="button" class="btn btn-success" style="width: 100%; min-width: 30px;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Low';">
+                        <button type="button" class="btn btn-success" style="width: 100%; min-width: 30px;" onclick="location.href='https://localhost:44392/Ticket/Tickets?search=Low';">
                             <h3>@Html.DisplayName("Unresolved Low Tickets")</h3>
                             <b>@priorityLowCount.ToString()</b>
                         </button>
@@ -45,7 +45,7 @@
                     <table style="float: left; width: 100%; min-width: 350px; max-width: 30px; margin-left: 400px; position: fixed; border: none; ">
                         <tr>
                             <td>
-                                <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Medium';">
+                                <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/Tickets?search=Medium';">
                                     <h3>@Html.DisplayName("Unresolved Medium Tickets")</h3>
                                     <b>@priorityMediumCount.ToString()</b>
                                 </button>
@@ -53,7 +53,7 @@
                             <table style="float: left; width: 100%; min-width: 350px; max-width: 250px; margin-left: 800px; position: fixed; border: none; ">
                                 <tr>
                                     <td>
-                                        <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=High';">
+                                        <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/Tickets?search=High';">
                                             <h3>@Html.DisplayName("Unresolved High Tickets")</h3>
                                             <b>@priorityHighCount.ToString()</b>
                                         </button>
@@ -77,7 +77,7 @@
                         {
                             @Html.AntiForgeryToken()
                             <center>
-                                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex", "Ticket")'">
+                                <button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Tickets", "Ticket")'">
                                     View Tickets
                                 </button>
                             </center>
@@ -100,8 +100,8 @@
                         {
                             @Html.AntiForgeryToken()
                             <center>
-                                @{ /*<button type="button" class="btn btn-success" onclick="location.href='@Url.Action("GetTicketsIndex", "Ticket")'"> (This is when the project goes live) */}
-                                <button type="button" class="btn btn-success" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Medium';">
+                                @{ /*<button type="button" class="btn btn-success" onclick="location.href='@Url.Action("Tickets", "Ticket")'"> (This is when the project goes live) */}
+                                <button type="button" class="btn btn-success" onclick="location.href='https://localhost:44392/Ticket/Tickets?Search=&sort=CreatedDate&sortdir=DESC';">
 
                                     View Tickets
                                 </button>
@@ -197,7 +197,7 @@
 
 <script type="text/javascript">
     function Redirect() {
-        location.href = "https://localhost:44392/Ticket/GetTicketsIndex";
+        location.href = "https://localhost:44392/Ticket/Tickets";
     }
 
     $("tr").click(function () {
@@ -237,7 +237,7 @@
                 },
                 yAxis: {
                     title: {
-                        text: 'Priorities'
+                        text: 'Tickets'
                     }
                 },
                 plotOptions: {

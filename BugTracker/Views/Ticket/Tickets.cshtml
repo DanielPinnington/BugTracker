@@ -33,10 +33,10 @@
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a href="#" class="navbar-brand"  onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex';" >Search</a>
+                        <a href="#" class="navbar-brand"  onclick="location.href='https://localhost:44392/Ticket/Tickets';" >Search</a>
                     </div>
                     <div class="collapse navbar-collapse">
-                        @using (Html.BeginForm("GetTicketsIndex", "Ticket", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                        @using (Html.BeginForm("Tickets", "Ticket", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
                         {
                             <div class="form-group">
                                 <input type="text" name="Search" value="@ViewBag.search" class="form-control" placeholder="search" />
@@ -65,7 +65,7 @@
                              //format:@<text><div class="edit" data-id="@item.ID" data-propertyname="Description">@item.Description</div></text>
                              )
                          )
-                @Html.ActionLink("Edit Tickets Page", "TicketsView", "User")
+                @Html.ActionLink("Edit Tickets Page", "TicketsEditor", "User")
 
 
             </div>
@@ -86,7 +86,7 @@
         <script>
             $(document).ready(function () {
                 var oldValue = '';
-                $('.edit').editable('/GetTicketsIndex/saveuser', {
+                $('.edit').editable('/Tickets/saveuser', {
                     cssclass: 'jeditForm',
                     tooltip: 'click to edit me...',
                     width: 'none',

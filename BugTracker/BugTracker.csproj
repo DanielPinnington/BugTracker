@@ -442,16 +442,16 @@
     <Content Include="Views\Admin\AdminRegistration.cshtml" />
     <Content Include="Views\Admin\AdminLogin.cshtml" />
     <Content Include="Views\User\TicketSystem.cshtml" />
-    <Content Include="Views\User\TicketsView.cshtml" />
+    <Content Include="Views\User\TicketsEditor.cshtml" />
     <Content Include="Views\User\ResetPassword.cshtml" />
     <Content Include="Views\Ticket\GetTickets.cshtml" />
-    <Content Include="Views\Ticket\GetTicketsIndex.cshtml" />
+    <Content Include="Views\Ticket\Tickets.cshtml" />
     <Content Include="Views\Shared\_GridPager.cshtml" />
     <Content Include="Views\Shared\_Grid.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
     <Content Include="Views\User\Details.cshtml" />
-    <Content Include="Views\User\mainPage.cshtml" />
+    <Content Include="Views\User\DashBoard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\" />

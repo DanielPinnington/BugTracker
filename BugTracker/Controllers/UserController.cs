@@ -152,7 +152,7 @@ namespace BugTracker.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("mainPage", "User");
+                            return RedirectToAction("DashBoard", "User");
                         }
                     }
                 }
@@ -284,9 +284,9 @@ namespace BugTracker.Controllers
                 db.Tickets.Add(user);
                 db.Configuration.ValidateOnSaveEnabled = false;
                 db.SaveChanges();
-                //return RedirectToAction("TicketsView", "User");
+                //return RedirectToAction("TicketsEditor", "User");
             }
-            return RedirectToAction("TicketsView", "User");
+            return RedirectToAction("TicketsEditor", "User");
             //return View();
         }
 
@@ -375,14 +375,14 @@ namespace BugTracker.Controllers
             ViewBag.Message = message;
             return View(model);
         }
-        public ActionResult TicketsView(Ticket user)
+        public ActionResult TicketsEditor(Ticket user)
         {
             BugTracking db = new BugTracking();
 
             return View(db.Tickets.OrderByDescending(x => x.Id).ToList());
         }
 
-        public ActionResult mainPage(Ticket user)
+        public ActionResult DashBoard(Ticket user)
         {
             BugTracking db = new BugTracking();
 
@@ -406,7 +406,7 @@ namespace BugTracker.Controllers
                 d.Tickets.Remove(tickets);
                 d.SaveChanges();
             }
-            return RedirectToAction("TicketsView", "User");
+            return RedirectToAction("TicketsEditor", "User");
         }
 
         [HttpGet]
@@ -426,7 +426,7 @@ namespace BugTracker.Controllers
                 d.Entry(ticket).State = EntityState.Modified;
                 d.SaveChanges();
             }
-            return RedirectToAction("TicketsView", "User");
+            return RedirectToAction("TicketsEditor", "User");
         }
 
         public ActionResult Details(int Id)

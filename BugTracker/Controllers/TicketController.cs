@@ -16,7 +16,7 @@ namespace BugTracker.Controllers
     {
 
         // GET: Ticket
-        public ActionResult GetTicketsIndex(int page = 1, string sort = "Priorities", string sortdir = "asc", string search = "")
+        public ActionResult Tickets(int page = 1, string sort = "Priorities", string sortdir = "asc", string search = "")
         {
             int pageSize = 10;
             int totalRecord = 0;
