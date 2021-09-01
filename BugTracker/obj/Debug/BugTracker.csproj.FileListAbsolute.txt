@@ -147,3 +147,5 @@ D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.csproj.CopyComplete
 D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.dll
 D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.pdb
 D:\BugTracker\BugTracker\BugTracker\obj\Debug\BugTracker.csproj.AssemblyReference.cache
+D:\BugTracker\BugTracker\BugTracker\bin\Json.dll
+D:\BugTracker\BugTracker\BugTracker\bin\Json.pdb

@@ -1,17 +1,18 @@
 ﻿using BugTracker.Models;
 //using Google.Apis.Admin.Directory.directory_v1.Data;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI.WebControls;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+
+
 
 namespace BugTracker.Controllers
 {
@@ -22,6 +23,17 @@ namespace BugTracker.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult GetData()
+        {
+            BugTracking context = new BugTracking();
+
+            var query = context.Tickets.Include("Priorities")
+                   .GroupBy(p => p.Priorities)
+                   .Select(g => new { name = g.Key, count = g.Count() }).ToList();
+
+            return Json(query, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Registration()

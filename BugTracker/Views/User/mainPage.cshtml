@@ -18,11 +18,7 @@
 
     </head>
     <body>
-        <h1>Welcome Back! @HttpContext.Current.User.Identity.Name </h1>
-        <p>
-            @Html.ActionLink("Create New", "Create")
-        </p>
-
+        <h2>Welcome, @HttpContext.Current.User.Identity.Name </h2>
 
         @{ var count = Model.Count();
 
@@ -37,44 +33,44 @@
             var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
 
             var recentTickets = Model.Count(x => x.CreatedDate >= monday); //This calculates a week from mondays tickets
-            
+
             <table style="float: left; width: 100%; min-width: 350px; min-height: 10px; max-width: 30px; position: fixed; border: none; z-index: 1;">
+                <tr>
+                    <td>
+                        <button type="button" class="btn btn-success" style="width: 100%; min-width: 30px;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Low';">
+                            <h3>@Html.DisplayName("Unresolved Low Tickets")</h3>
+                            <b>@priorityLowCount.ToString()</b>
+                        </button>
+                    </td>
+                    <table style="float: left; width: 100%; min-width: 350px; max-width: 30px; margin-left: 400px; position: fixed; border: none; ">
                         <tr>
                             <td>
-                                <button type="button" class="btn btn-success" style="width: 100%; min-width: 20px;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Low';">
-                                    <h3>@Html.DisplayName("Unresolved Low Tickets")</h3>
-                                    @priorityLowCount.ToString()
+                                <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Medium';">
+                                    <h3>@Html.DisplayName("Unresolved Medium Tickets")</h3>
+                                    <b>@priorityMediumCount.ToString()</b>
                                 </button>
                             </td>
-                            <table style="float: left; width: 100%; min-width: 350px; max-width: 30px; margin-left: 400px; position: fixed; border: none; ">
+                            <table style="float: left; width: 100%; min-width: 350px; max-width: 250px; margin-left: 800px; position: fixed; border: none; ">
                                 <tr>
                                     <td>
-                                        <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=Medium';">
-                                            <h3>@Html.DisplayName("Unresolved Medium Tickets")</h3>
-                                            @priorityMediumCount.ToString()
+                                        <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=High';">
+                                            <h3>@Html.DisplayName("Unresolved High Tickets")</h3>
+                                            <b>@priorityHighCount.ToString()</b>
                                         </button>
                                     </td>
-                                    <table style="float: left; width: 100%; min-width: 350px; max-width: 250px; margin-left: 800px; position: static; border: none; ">
-                                        <tr>
-                                            <td>
-                                                <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/GetTicketsIndex?search=High';">
-                                                    <h3>@Html.DisplayName("Unresolved High Tickets")</h3>
-                                                    @priorityHighCount.ToString()
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </table>
                                 </tr>
                             </table>
                         </tr>
+                    </table>
+                </tr>
             </table>
 
 
-            <table style="float: left; width: 19%; min-width: 24px; margin: 10px 0; margin-top: 120px; position:fixed; border:groove; ">
+            <table style="float: left; min-height: 75px; width: 320px; min-width: 24px; margin: 10px 0; margin-top: 120px; position: fixed; ">
                 <tr>
                     <td>
-                        <h3>@Html.DisplayName("Tickets Available")</h3>
-                        <h4>Currently: @dbCount.ToString()</h4>
+                        <h3>&nbsp;@Html.DisplayName("Tickets Available")</h3>
+                        <h4><b>&nbsp;@dbCount.ToString()</b></h4>
                         <h5 style="text-align: center">View and Submit bug tickets.</h5>
 
                         @using (Html.BeginForm())
@@ -92,10 +88,11 @@
                 </tr>
             </table>
 
-            <table style="min-height: 75px; width: 320px; margin-left: 10px; margin-top: 320px; bottom: 100px; border:groove;">
-                <tr>
+            <table style="min-height: 75px; width: 320px; margin-top: 320px; bottom: 100px;">
+                <tr style="w">
                     <td>
-                        <h3>@Html.DisplayName("Tickets this week: " + recentTickets.ToString())</h3>
+                        <h3>&nbsp;@Html.DisplayName("Tickets this Week")</h3>
+                        <h4><b>&nbsp;@recentTickets.ToString()</b></h4>
 
                         <h5 style="text-align: center">View and Submit bug tickets.</h5>
 
@@ -117,13 +114,10 @@
                 </tr>
             </table>
         }
-        <table class="table" style="float: right; height: 20%; min-height: 20%; min-width: 40%; width: 20%; margin: 400px; margin-top: -370px;  position: fixed; border: groove;">
+        <table class="table" style="float: right; height: 20%; min-height: 30%; min-width: 39%; max-height: 10%; width: 20%; margin: 400px; margin-top: -645px; position: fixed;">
             <tr">
-                <th style="color: red;">
+                <th style="">
                     @Html.DisplayNameFor(models => models.Title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(models => models.Description)
                 </th>
                 <th>
                     @Html.DisplayNameFor(models => models.CreatedDate)
@@ -149,11 +143,6 @@
                         @Html.DisplayFor(modelItem => item.Title)
                     </td>
                     <td>
-
-                        @Html.DisplayFor(modelItem => item.Description, new { @class = "hidden" })
-
-                    </td>
-                    <td>
                         @item.CreatedDate.ToShortDateString()
                     </td>
                     <td>
@@ -169,7 +158,7 @@
             }
             <style>
                 tr:hover, tr.selected {
-                    background-color: rgb(128, 128, 128, .4);
+                    background-color: rgb(128, 128, 128, .0);
                 }
 
                 td {
@@ -215,6 +204,61 @@
         $(this).addClass("selected").siblings().removeClass("selected");
     });
 </script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<br />
+<div id="container" style="min-width: 280px; height: 260px; margin: 0 auto; position: sticky" ></div>
+
+
+<script>
+    $(document).ready(function () {
+        $.getJSON("/User/GetData", function (data) {
+            var Names = []
+            var Qts = []
+            for (var i = 0; i < data.length; i++) {
+                Names.push(data[i].name);
+                Qts.push(data[i].count);
+            }
+
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'line'
+                },
+                title: {
+                    text: 'Tickets'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    categories: Names
+                },
+                yAxis: {
+                    title: {
+                        text: 'Priorities'
+                    }
+                },
+                plotOptions: {
+                    line: {
+                        dataLabels: {
+                            enabled: true
+                        },
+                        enableMouseTracking: false
+                    }
+                },
+                series: [{
+                    name: 'Trend',
+                    data: Qts
+                }]
+            });
+        });
+    });
+
+
+</script>
+
 @{
     /*
            <div id="grid" style="float: right; height: 10px; width: 740px; margin-right: 14px; margin-top: -330px;">
