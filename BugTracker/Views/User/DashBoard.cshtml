@@ -30,14 +30,14 @@
             var priorityMediumCount = db.Tickets.Count(x => x.Priorities == "Medium");
             var priorityHighCount = db.Tickets.Count(x => x.Priorities == "High");
             var unassignedProjects = db.Tickets.Count(x => x.CurrentProject == null);
-            var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Monday);
+            var monday = DateTime.Today.AddDays(-(int)DateTime.Today.DayOfWeek + (int)DayOfWeek.Sunday);
 
             var recentTickets = Model.Count(x => x.CreatedDate >= monday); //This calculates a week from mondays tickets
 
             <table style="float: left; width: 100%; min-width: 350px; min-height: 10px; max-width: 30px; position: fixed; border: none; z-index: 1;">
                 <tr>
                     <td>
-                        <button type="button" class="btn btn-success" style="width: 100%; min-width: 30px;" onclick="location.href='https://localhost:44392/Ticket/Tickets?search=Low';">
+                        <button type="button" class="btn-outline-success" style="width: 100%; min-width: 30px;" onclick="location.href = 'https://localhost:44392/Ticket/Tickets?search=Low';">
                             <h3>@Html.DisplayName("Unresolved Low Tickets")</h3>
                             <b>@priorityLowCount.ToString()</b>
                         </button>
@@ -45,7 +45,7 @@
                     <table style="float: left; width: 100%; min-width: 350px; max-width: 30px; margin-left: 400px; position: fixed; border: none; ">
                         <tr>
                             <td>
-                                <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/Tickets?search=Medium';">
+                                <button type="button" class="btn-outline-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/Tickets?search=Medium';">
                                     <h3>@Html.DisplayName("Unresolved Medium Tickets")</h3>
                                     <b>@priorityMediumCount.ToString()</b>
                                 </button>
@@ -53,7 +53,7 @@
                             <table style="float: left; width: 100%; min-width: 350px; max-width: 250px; margin-left: 800px; position: fixed; border: none; ">
                                 <tr>
                                     <td>
-                                        <button type="button" class="btn btn-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/Tickets?search=High';">
+                                        <button type="button" class="btn-outline-success" style="width: 100%;" onclick="location.href='https://localhost:44392/Ticket/Tickets?search=High';">
                                             <h3>@Html.DisplayName("Unresolved High Tickets")</h3>
                                             <b>@priorityHighCount.ToString()</b>
                                         </button>
@@ -158,6 +158,10 @@
             }
             <style>
                 tr:hover, tr.selected {
+                    background-color: rgb(128, 128, 128, .0);
+                }
+
+                button1:hover {
                     background-color: rgb(128, 128, 128, .0);
                 }
 
